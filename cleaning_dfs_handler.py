@@ -1,9 +1,17 @@
 import pandas as pd
 
 def clean_nyc_traffic_data(df):
+   #remove spaces in column names
+   def remove_spaces_from_columns_df(df):
+      for column in df.columns:
+         new_column_name = column.replace(' ', '_')
+         df.rename(columns={column: new_column_name}, inplace=True)
+      return df
+   
+   df = remove_spaces_from_columns_df(df)
    #change data types to date
-   df["CRASH DATE"] = pd.to_datetime(df["CRASH DATE"])
-   df["CRASH TIME"] = pd.to_datetime(df["CRASH TIME"], format="%H:%M").dt.time
+   df["CRASH_DATE"] = pd.to_datetime(df["CRASH_DATE"])
+   df["CRASH_TIME"] = pd.to_datetime(df["CRASH_TIME"], format="%H:%M").dt.time
    
    # df['ON STREET NAME'] = df['ON STREET NAME'].astype(str)
    # df['OFF STREET NAME'] = df['OFF STREET NAME'].astype(str)
@@ -11,7 +19,7 @@ def clean_nyc_traffic_data(df):
    # df['CROSS STREET NAME'] = df['CROSS STREET NAME'].astype(str)
 
    # sort the df
-   df.sort_values(by=["CRASH DATE", "CRASH TIME"], ascending=[False, False], inplace=True)
+   df.sort_values(by=["CRASH_DATE", "CRASH_TIME"], ascending=[False, False], inplace=True)
 
    #trim spaces for the whole df
    def trim_spaces_in_dataframe(df):
@@ -26,7 +34,7 @@ def clean_nyc_traffic_data(df):
 
    # Replace NaN values in 'BOROUGH' when specific conditions are met
    def replace_null_with_other(row):
-      if pd.isna(row['BOROUGH']) and pd.isna(row['ON STREET NAME']) and pd.isna(row['CROSS STREET NAME']) and pd.isna(row['OFF STREET NAME']):
+      if pd.isna(row['BOROUGH']) and pd.isna(row['ON_STREET_NAME']) and pd.isna(row['CROSS_STREET_NAME']) and pd.isna(row['OFF_STREET_NAME']):
          return 'OTHER'
       else:
          return row['BOROUGH']
@@ -35,8 +43,8 @@ def clean_nyc_traffic_data(df):
 
    def replace_null_borough_with_street_name(df, street_name_dict):
     for index, row in df.iterrows():
-        if pd.isna(row['BOROUGH']) and not pd.isna(row['ON STREET NAME']):
-            on_street_name = row['ON STREET NAME']
+        if pd.isna(row['BOROUGH']) and not pd.isna(row['ON_STREET_NAME']):
+            on_street_name = row['ON_STREET_NAME']
             if on_street_name in street_name_dict:
                 df.at[index, 'BOROUGH'] = street_name_dict[on_street_name]
     return df
@@ -56,24 +64,32 @@ def clean_nyc_traffic_data(df):
 
    def replace_null_borough_with_off_street(df, street_name_dict):
     for index, row in df.iterrows():
-        if pd.isna(row['BOROUGH']) and not pd.isna(row['OFF STREET NAME']):
-            off_street_name = row['OFF STREET NAME']
+        if pd.isna(row['BOROUGH']) and not pd.isna(row['OFF_STREET_NAME']):
+            off_street_name = row['OFF_STREET_NAME']
             if off_street_name in street_name_dict:
                 df.at[index, 'BOROUGH'] = street_name_dict[off_street_name]
     return df
 
    df = replace_null_borough_with_off_street(df, street_borough_mapping)
 
-
-   def replace_null_borough_with_cross_street(df, street_name_dict):
-    for index, row in df.iterrows():
-        if pd.isna(row['BOROUGH']) and not pd.isna(row['CROSS STREET NAME']):
-            cross_street_name = row['CROSS STREET NAME']
-            if cross_street_name in street_name_dict:
-                df.at[index, 'BOROUGH'] = street_name_dict[cross_street_name]
+   def remove_spaces_from_columns_df(df):
+    for column in df.columns:
+        new_column_name = column.replace(' ', '_')
+        df.rename(columns={column: new_column_name}, inplace=True)
     return df
+   
+   df = remove_spaces_from_columns_df(df)
 
-   df = replace_null_borough_with_cross_street(df, cross_street_mapping)
+
+#    def replace_null_borough_with_cross_street(df, street_name_dict):
+#     for index, row in df.iterrows():
+#         if pd.isna(row['BOROUGH']) and not pd.isna(row['CROSS STREET NAME']):
+#             cross_street_name = row['CROSS STREET NAME']
+#             if cross_street_name in street_name_dict:
+#                 df.at[index, 'BOROUGH'] = street_name_dict[cross_street_name]
+#     return df
+
+#    df = replace_null_borough_with_cross_street(df, cross_street_mapping)
 
    
 
