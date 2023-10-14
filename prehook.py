@@ -24,7 +24,8 @@ def execute_sql_folder(db_session, sql_folder_path):
 def CSV_Full(db_session):
     table_name = "All_Accidents"
     path=r"C:\Users\Admin\Desktop\SEF-Final-Project-NYC-Accidents-Analysis\csv_tables\test.csv"
-    url = "https://data.cityofnewyork.us/api/views/yjf6-ewhz/rows.csv?accessType=DOWNLOAD"
+    # url = "https://data.cityofnewyork.us/api/views/yjf6-ewhz/rows.csv?accessType=DOWNLOAD"
+    url= "https://data.cityofnewyork.us/api/views/h9gi-nx95/rows.csv?accessType=DOWNLOAD"
     print("Working on: Download and read")
     df = download_and_read_csv(path, url)
     print("Done: Download and read")

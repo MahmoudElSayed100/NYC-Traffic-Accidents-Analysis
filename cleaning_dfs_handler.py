@@ -10,7 +10,8 @@ def clean_nyc_traffic_data(df):
    
    df = remove_spaces_from_columns_df(df)
    #change data types to date
-   df["CRASH_DATE"] = pd.to_datetime(df["CRASH_DATE"])
+   # df["CRASH_DATE"] = pd.to_datetime(df["CRASH_DATE"])
+   df['CRASH_TIME'] = pd.to_datetime(df['CRASH_TIME'])
    df["CRASH_TIME"] = pd.to_datetime(df["CRASH_TIME"], format="%H:%M").dt.time
    
    # df['ON STREET NAME'] = df['ON STREET NAME'].astype(str)
@@ -72,13 +73,26 @@ def clean_nyc_traffic_data(df):
 
    df = replace_null_borough_with_off_street(df, street_borough_mapping)
 
-   def remove_spaces_from_columns_df(df):
-    for column in df.columns:
-        new_column_name = column.replace(' ', '_')
-        df.rename(columns={column: new_column_name}, inplace=True)
-    return df
+   #drop na Borough
+
+
+   #main street ( displayed street )
+   df['STREET'] = df['ON_STREET_NAME'].fillna(df['OFF_STREET_NAME']).fillna('Unspecified')
    
-   df = remove_spaces_from_columns_df(df)
+   #new column
+   df['TOTAL_VICTIMS'] = df['NUMBER_OF_PERSONS_KILLED'] + df['NUMBER_OF_PERSONS_INJURED']
+
+   #new column
+   intervals = [(0, 4), (4, 8), (8, 12), (12, 16), (16, 20), (20, 24)]
+   labels = ['Late Night', 'Early Morning', 'Morning', 'Noon', 'Evening', 'Night']
+
+   # Categorize the times
+   df['PART_OF_DAY'] = pd.cut(df['CRASH_TIME'].apply(lambda x: x.hour), bins=[x[0] for x in intervals] + [intervals[-1][1]], labels=labels)
+
+   #replace na with unspecified
+   df['CONTRIBUTING_FACTOR_VEHICLE_1'] = df['CONTRIBUTING_FACTOR_VEHICLE_1'].fillna('Unspecified')
+
+
 
 
 #    def replace_null_borough_with_cross_street(df, street_name_dict):
