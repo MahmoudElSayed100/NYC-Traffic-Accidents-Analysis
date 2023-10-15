@@ -17,6 +17,12 @@ class ErrorHandling(Enum):
     DB_RETURN_INSERT_INTO_SQL_STMT_ERROR = "Error in return insert into sql statement function"
     EXECUTE_PREHOOK_ERROR = "Error in execute prehook function"
     ERROR_INSERT_STMNT = "Error in create insert statment fucntion"
+    CL_HANDLER_REMOVE_SPACES_FROM_COLUMNS = "Error in remove spaces from columns function"
+    CL_HANDLER_TRIM_SPACES_FROM_COLUMNS = " Error in trim spaces in datafram function"
+    CL_HANDLER_REPLACE_NULL_WITH_OTHER = " Error in replace null values in borough with other function"
+    CL_HANDLER_REPLACE_NULL_WITH_ON_STR_NAME = " Error in replace null values in borough with ON STREET NAME function"
+    CL_HANDLER_REPLACE_NULL_WITH_OFF_STR_NAME = " Error in replace null values in borough with OFF STREET NAME function"
+    CL_MAIN_FUNCTION = "Error in clean nyc traffic data function"
 
 class InputTypes(Enum):
     SQL = "SQL"
