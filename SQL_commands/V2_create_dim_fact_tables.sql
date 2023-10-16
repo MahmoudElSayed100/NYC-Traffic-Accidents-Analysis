@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS traffic_accidents.dim_location (
     off_street_name TEXT,
     cross_street_name TEXT,
     street TEXT,
-    zip_code INT,
+    zip_code TEXT,
     latitude FLOAT,
     longitude FLOAT,
     location TEXT
