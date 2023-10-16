@@ -77,7 +77,7 @@ def clean_nyc_traffic_data(df):
    try:
       #change data types
       df['CRASH DATE'] = pd.to_datetime(df['CRASH DATE'])
-      df["CRASH TIME"] = pd.to_datetime(df["CRASH TIME"], format="%H:%M").dt.time
+      df['CRASH TIME'] = pd.to_datetime(df['CRASH TIME'], format='%H:%M', errors='coerce').dt.time
       #sort df
       df.sort_values(by=["CRASH DATE", "CRASH TIME"], ascending=[False, False], inplace=True)
       df.reset_index(drop=True, inplace=True)
@@ -102,7 +102,7 @@ def clean_nyc_traffic_data(df):
       #NEW COLUMN: total victims (all killed + all injured)
       df['TOTAL_VICTIMS'] = df['NUMBER_OF_PERSONS_KILLED'] + df['NUMBER_OF_PERSONS_INJURED']
       #NEW COLUMN: PART_OF_DAY : binning of time of day
-      intervals = [(0, 4), (4, 8), (8, 12), (12, 16), (16, 20), (20, 24)]
+      intervals = [(-1, 4), (4, 8), (8, 12), (12, 16), (16, 20), (20, 24),]
       labels = ['Late Night', 'Early Morning', 'Morning', 'Noon', 'Evening', 'Night']
       df['PART_OF_DAY'] = pd.cut(df['CRASH_TIME'].apply(lambda x: x.hour), bins=[x[0] for x in intervals] + [intervals[-1][1]], labels=labels)
       # FILL null values in zip zode with '0000'
