@@ -38,13 +38,22 @@ def return_query(db_session,query):
 def return_data_as_df(file_executor, input_type, db_session = None):
     return_dataframe = None
     try:
-        return_dataframe = pd.read_csv(file_executor)
+        if input_type == InputTypes.CSV:
+            return_dataframe = pd.read_csv(file_executor)
+        elif input_type == InputTypes.SQL:
+            return_dataframe = pd.read_sql_query(con= db_session, sql= file_executor)
+        else:
+            raise Exception("The file type does not exist, please check main function")
     except Exception as e:
-        suffix = str(e)
-        error_prefix = ErrorHandling.RETURN_DATA_CSV_ERROR.value
-    else:
-         error_prefix = ErrorHandling.RETURN_DATA_UNDEFINED_ERROR.value
-         show_error_message(error_prefix, suffix)
+        if input_type == InputTypes.CSV:
+            suffix = str(e)
+            error_prefix = ErrorHandling.RETURN_DATA_CSV_ERROR.value
+        elif input_type == InputTypes.SQL:
+            suffix = str(e)
+            error_prefix = ErrorHandling.RETURN_DATA_SQL_ERROR.value
+        else:
+            error_prefix = ErrorHandling.RETURN_DATA_UNDEFINED_ERROR.value
+            show_error_message(error_prefix, suffix)
     finally:
          return return_dataframe
 
