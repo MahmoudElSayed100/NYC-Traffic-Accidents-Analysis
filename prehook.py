@@ -1,27 +1,13 @@
 from database_handler import create_connection, close_connection, execute_query,return_create_statement_from_df_stg,return_insert_into_sql_statement_from_df_stg
-from misc_handler import download_and_read_csv
+from misc_handler import download_and_read_csv, execute_sql_folder
 from lookups import ErrorHandling, CSV_FOLDER_PATH
 from logging_handler import show_error_message
 import os
 from cleaning_dfs_handler import clean_nyc_traffic_data
 
 
-def execute_sql_folder(db_session, sql_folder_path):
-    try:
-        sql_files = [sqlfile for sqlfile in os.listdir(sql_folder_path) if sqlfile.endswith('.sql')]
-        sorted_sql_files =  sorted(sql_files)
-        for sql_file in sorted_sql_files:
-            with open(os.path.join(sql_folder_path,sql_file), 'r') as file:
-                sql_query = file.read()
-                return_val = execute_query(db_session= db_session, query= sql_query)
-                if not return_val == ErrorHandling.NO_ERROR:
-                    raise Exception(f"  SQL File Error on SQL FILE = " +  str(sql_file))
-    except Exception as e:
-        suffix = str(e)
-        error_prefix = ErrorHandling.PREHOOK_EXECUTE_SQL_FOLDER.value
-        show_error_message(error_prefix, suffix)
 #download, read, clean and create stg tables
-def CSV_Full(db_session):
+def get_cleaned_data_from_csv_into_staging(db_session):
     table_name = "All_Accidents"
     path=r"C:\Users\Admin\Desktop\SEF-Final-Project-NYC-Accidents-Analysis\csv_tables\test.csv"
     # url = "https://data.cityofnewyork.us/api/views/yjf6-ewhz/rows.csv?accessType=DOWNLOAD"
@@ -48,13 +34,13 @@ def CSV_Full(db_session):
 
 
 
-def execute_prehook(sql_folder_path =r"C:\Users\Admin\Desktop\SEF-Final-Project-NYC-Accidents-Analysis\SQL_commands"):
+def execute_prehook(sql_folder_path ="SQL_commands"):
    try:
       db_session = create_connection()
 
       execute_sql_folder(db_session , sql_folder_path)
 
-      CSV_Full(db_session)
+      get_cleaned_data_from_csv_into_staging(db_session)
 
       close_connection(db_session)
    except Exception as e:

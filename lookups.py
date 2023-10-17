@@ -13,7 +13,7 @@ class ErrorHandling(Enum):
     DB_RETURN_INSERT_INTO_SQL_STMT_STG_ERROR = "Error in insert into sql statement (stg)"
     DB_RETURN_CREATE_STMT_FROM_DF_STG_ERROR = "Error in create statement from df (stg)"
     CLOSE_CONNECTION_ERROR = "Error in closing connection"
-    PREHOOK_EXECUTE_SQL_FOLDER = "Error in prehook, execute sql folder fucntion"
+    EXECUTE_SQL_FOLDER = "Error in execute sql folder fucntion"
     DB_RETURN_INSERT_INTO_SQL_STMT_ERROR = "Error in return insert into sql statement function"
     EXECUTE_PREHOOK_ERROR = "Error in execute prehook function"
     ERROR_INSERT_STMNT = "Error in create insert statment fucntion"
@@ -23,6 +23,7 @@ class ErrorHandling(Enum):
     CL_HANDLER_REPLACE_NULL_WITH_ON_STR_NAME = " Error in replace null values in borough with ON STREET NAME function"
     CL_HANDLER_REPLACE_NULL_WITH_OFF_STR_NAME = " Error in replace null values in borough with OFF STREET NAME function"
     CL_MAIN_FUNCTION = "Error in clean nyc traffic data function"
+    RETURN_LAST_ETL_DATE_ERROR = "Error in return last etl updated date, hook "
 
 class InputTypes(Enum):
     SQL = "SQL"

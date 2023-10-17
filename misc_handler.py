@@ -1,5 +1,9 @@
 import pandas as pd
 import requests
+from database_handler import execute_query
+import os
+from lookups import ErrorHandling
+from logging_handler import show_error_message
 
 
 def download_and_read_csv(local_file_path, csv_url): 
@@ -12,3 +16,19 @@ def download_and_read_csv(local_file_path, csv_url):
    else:
       print(f"Failed to download CSV. Status code: {response.status_code}")
       return None
+   
+
+def execute_sql_folder(db_session, sql_folder_path):
+    try:
+        sql_files = [sqlfile for sqlfile in os.listdir(sql_folder_path) if sqlfile.endswith('.sql')]
+        sorted_sql_files =  sorted(sql_files)
+        for sql_file in sorted_sql_files:
+            with open(os.path.join(sql_folder_path,sql_file), 'r') as file:
+                sql_query = file.read()
+                return_val = execute_query(db_session= db_session, query= sql_query)
+                if not return_val == ErrorHandling.NO_ERROR:
+                    raise Exception(f"  SQL File Error on SQL FILE = " +  str(sql_file))
+    except Exception as e:
+        suffix = str(e)
+        error_prefix = ErrorHandling.EXECUTE_SQL_FOLDER.value
+        show_error_message(error_prefix, suffix)
