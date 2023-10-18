@@ -24,6 +24,10 @@ class ErrorHandling(Enum):
     CL_HANDLER_REPLACE_NULL_WITH_OFF_STR_NAME = " Error in replace null values in borough with OFF STREET NAME function"
     CL_MAIN_FUNCTION = "Error in clean nyc traffic data function"
     RETURN_LAST_ETL_DATE_ERROR = "Error in return last etl updated date, hook "
+    RETURN_INSERT_OR_UPDATE_LAST_ETL_ERROR = "Error in insert or update last etl checkpoint function"
+    POSTHOOK_CLEANUP_ERROR = "Error in posthook cleanup function"
+    EXECUTE_POSTHOOK_ERROR = "Error in execute posthook function"
+    EXECUTE_HOOK_ERROR = "Error in execute hook function"
 
 class InputTypes(Enum):
     SQL = "SQL"
