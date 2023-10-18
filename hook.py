@@ -2,7 +2,7 @@ from database_handler import create_connection, execute_query, close_connection,
 from lookups import DESTINATION_SCHEMA, InputTypes, ErrorHandling
 from logging_handler import show_error_message
 from misc_handler import execute_sql_folder
-import datetime
+from datetime import datetime
 
 #tested
 def create_etl_checkpoint(db_session):
@@ -28,7 +28,7 @@ def return_etl_last_updated_date(db_session):
          return_date = "2012-07-01"
          does_etl_time_exists = False
       else:
-         return_date = etl_df['elt_last_run_date'].iloc[0]
+         return_date = etl_df['etl_last_run_date'].iloc[0]
          does_etl_time_exists = True
    except Exception as e:
       suffix = str(e)
@@ -59,7 +59,7 @@ def insert_or_update_etl_checkpoint(db_session,does_etl_time_exists,  etl_date =
 
 
 def excute_hook():
-   sql_folder_path = "hook_SQL_commands"
+   sql_folder_path = r"C:\Users\Admin\Desktop\SEF-Final-Project-NYC-Accidents-Analysis\hook_SQL_commands"
    try:
       print("executing hook")
       db_session = create_connection()
@@ -70,7 +70,8 @@ def excute_hook():
       print("executing hook sql folder")
       execute_sql_folder(db_session,sql_folder_path)
       print("inserting etl checkpoint")
-      insert_or_update_etl_checkpoint(db_session, does_etl_time_exists, datetime.now())
+      current_date = datetime.now().date()
+      insert_or_update_etl_checkpoint(db_session, does_etl_time_exists, current_date)
       print("done")
       close_connection(db_session=db_session)
    except Exception as e:

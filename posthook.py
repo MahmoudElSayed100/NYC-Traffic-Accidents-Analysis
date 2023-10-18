@@ -21,7 +21,7 @@ def execute_posthook():
       posthook_cleanup(db_session=db_session)
       print("stg tables truncated!")
       close_connection(db_session=db_session)
-      print("fucking successsss")
+      print("Success")
    except Exception as e:
       suffix = str(e)
       error_prefix = ErrorHandling.EXECUTE_POSTHOOK_ERROR.value
