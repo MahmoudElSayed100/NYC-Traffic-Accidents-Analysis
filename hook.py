@@ -4,11 +4,12 @@ from logging_handler import show_error_message
 from misc_handler import execute_sql_folder
 import datetime
 
+#tested
 def create_etl_checkpoint(db_session):
    schema_destination_table = DESTINATION_SCHEMA.DESTINATION_NAME.value
    # INSEATE OF etl_last_run_date timestamp, it's Date in order to put the last crash date
    query = f"""
-         CREATE TABLE IF NOT EXISTS {schema_destination_table}.elt_checkpoint
+         CREATE TABLE IF NOT EXISTS {schema_destination_table}.etl_checkpoint
          (
             etl_last_run_date DATE
          )
@@ -19,12 +20,13 @@ def return_etl_last_updated_date(db_session):
    schema_destination_table = DESTINATION_SCHEMA.DESTINATION_NAME.value
    does_etl_time_exists = False
    query = f"""
-      SELECT elt_last_run_date from {schema_destination_table}.etl_checkpoint ORDER BY etl_last_run_date DESC LIMIT 1
+      SELECT etl_last_run_date from {schema_destination_table}.etl_checkpoint ORDER BY etl_last_run_date DESC LIMIT 1
    """
    try:
-      etl_df = return_data_as_df(query,input_type= InputTypes.SQL, db_session= db_session)
+      etl_df = return_data_as_df(file_executor = query, input_type= InputTypes.SQL, db_session= db_session)
       if len(etl_df) == 0:
          return_date = "2012-07-01"
+         does_etl_time_exists = False
       else:
          return_date = etl_df['elt_last_run_date'].iloc[0]
          does_etl_time_exists = True
@@ -61,8 +63,10 @@ def excute_hook():
    try:
       print("executing hook")
       db_session = create_connection()
+      print("creating etl checkpoint")
+      create_etl_checkpoint(db_session=db_session)
       print("returning last etl updated date")
-      etl_date , does_etl_time_exists = return_etl_last_updated_date(db_session)
+      return_date , does_etl_time_exists = return_etl_last_updated_date(db_session)
       print("executing hook sql folder")
       execute_sql_folder(db_session,sql_folder_path)
       print("inserting etl checkpoint")
