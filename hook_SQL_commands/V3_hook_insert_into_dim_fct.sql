@@ -1,4 +1,4 @@
-a--dim_accident_cause
+--dim_accident_cause
 INSERT INTO traffic_accidents.dim_accident_cause(
 	collision_id,
 	crash_date,
