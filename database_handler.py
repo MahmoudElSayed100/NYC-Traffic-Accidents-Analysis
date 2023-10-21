@@ -9,7 +9,6 @@ config_dict = {
     "user"      : "postgres",
     "password"  : "M@rkseven11"
 }
-
 def create_connection():
     db_session = None
     try:
