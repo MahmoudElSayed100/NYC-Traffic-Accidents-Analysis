@@ -22,6 +22,8 @@ def trim_spaces_in_df(df):
       error_prefix = ErrorHandling.CL_HANDLER_TRIM_SPACES_FROM_COLUMNS.value
       suffix = str(e)
       show_error_message(error_prefix, suffix)
+      return df  # Add this line to ensure you return the DataFrame even in case of an exception
+
 
 def replace_null_with_other(row):
    try:
@@ -43,17 +45,17 @@ def replace_null_borough_with_zipcode(df, zipcode_dic):
                   df.at[index, 'BOROUGH'] = zipcode_dic[zipcode]
       return df
    except Exception as e:
-      error_prefix = ErrorHandling.CL_HANDLER_REPLACE_NULL_WITH_ZIP_CODE.value
+      error_prefix = ErrorHandling.CL_REPLACE_NULL_B_WITH_ON_STR_NAME.value
       suffix = str(e)
       show_error_message(error_prefix, suffix)
 
 def replace_null_borough_with_on_street_name(df, street_name_dict):
    try:
       for index, row in df.iterrows():
-         if pd.isna(row['BOROUGH']) and not pd.isna(row['ON_STREET_NAME']):
-               on_street_name = row['ON_STREET_NAME']
+         if pd.isna(row['borough']) and not pd.isna(row['on_street_name']):
+               on_street_name = row['on_street_name']
                if on_street_name in street_name_dict:
-                  df.at[index, 'BOROUGH'] = street_name_dict[on_street_name]
+                  df.at[index, 'borough'] = street_name_dict[on_street_name]
       return df
    except Exception as e:
       error_prefix = ErrorHandling.CL_HANDLER_REPLACE_NULL_WITH_ON_STR_NAME.value
@@ -63,26 +65,26 @@ def replace_null_borough_with_on_street_name(df, street_name_dict):
 def replace_null_borough_with_off_street(df, street_name_dict):
    try:
       for index, row in df.iterrows():
-         if pd.isna(row['BOROUGH']) and not pd.isna(row['OFF_STREET_NAME']):
-               off_street_name = row['OFF_STREET_NAME']
+         if pd.isna(row['borough']) and not pd.isna(row['off_street_name']):
+               off_street_name = row['off_street_name']
                if off_street_name in street_name_dict:
-                  df.at[index, 'BOROUGH'] = street_name_dict[off_street_name]
+                  df.at[index, 'borough'] = street_name_dict[off_street_name]
       return df
    except Exception as e:
       error_prefix = ErrorHandling.CL_HANDLER_REPLACE_NULL_WITH_OFF_STR_NAME.value
       suffix = str(e)
       show_error_message(error_prefix, suffix)
 
-def clean_nyc_traffic_data(df):
+def clean_nyc_traffic_data_API(df):
    try:
       #change data types
-      df['CRASH DATE'] = pd.to_datetime(df['CRASH DATE'])
-      df['CRASH TIME'] = pd.to_datetime(df['CRASH TIME'], format='%H:%M', errors='coerce').dt.time
+      df['crash_date'] = pd.to_datetime(df['crash_date'])
+      df['crash_time'] = pd.to_datetime(df['crash_time'], format='%H:%M', errors='coerce').dt.time
       #sort df
-      df.sort_values(by=["CRASH DATE", "CRASH TIME"], ascending=[False, False], inplace=True)
+      df.sort_values(by=["crash_date", "crash_time"], ascending=[False, False], inplace=True)
       df.reset_index(drop=True, inplace=True)
       #replace ' ' with _ in df column names
-      df = remove_spaces_from_columns_df(df)
+      # df = remove_spaces_from_columns_df(df) /////////////////////
       #trim spaces in df
       df = trim_spaces_in_df(df)
       #Replace NaN values in 'BOROUGH' when specific conditions are met #DROPED ALL SINCE THEY'RE MINIMAL(91K OUT OF 2.3M)
@@ -92,36 +94,36 @@ def clean_nyc_traffic_data(df):
       #Replace Nan values in borough with off street name
       df = replace_null_borough_with_off_street(df, street_borough_mapping)
       #Drop columns borough is na (no way to find the borough)
-      df.dropna(subset=['BOROUGH'], inplace=True)
+      df.dropna(subset=['borough'], inplace=True)
       #NEW COLUMN: main street ( displayed street )
-      df['STREET'] = df['ON_STREET_NAME'].fillna(df['OFF_STREET_NAME']).fillna('Unspecified')
+      df['street'] = df['on_street_name'].fillna(df['off_street_name']).fillna('Unspecified')
       # FILL na values in Number of persons injured (= number of cyclists injured + number of pedestrians injured + number of motorists injured)
-      df['NUMBER_OF_PERSONS_INJURED'].fillna(df['NUMBER_OF_PEDESTRIANS_INJURED'] + df['NUMBER_OF_CYCLIST_INJURED'] + df['NUMBER_OF_MOTORIST_INJURED'], inplace=True)
+      df['number_of_persons_injured'].fillna(df['number_of_pedestrians_injured'] + df['number_of_cyclist_injured'] + df['number_of_motorist_injured'], inplace=True)
       #FILL na values in Number of persons killed (= number of cyclists killed + number of pedestrians killed + number of motorists killed)
-      df['NUMBER_OF_PERSONS_KILLED'].fillna(df['NUMBER_OF_PEDESTRIANS_KILLED'] + df['NUMBER_OF_CYCLIST_KILLED'] + df['NUMBER_OF_MOTORIST_KILLED'], inplace=True)
+      df['number_of_persons_killed'].fillna(df['number_of_pedestrians_killed'] + df['number_of_cyclist_killed'] + df['number_of_motorist_killed'], inplace=True)
       #NEW COLUMN: total victims (all killed + all injured)
-      df['TOTAL_VICTIMS'] = df['NUMBER_OF_PERSONS_KILLED'] + df['NUMBER_OF_PERSONS_INJURED']
+      df['total_victims'] = df['number_of_persons_killed'] + df['number_of_persons_injured']
       #NEW COLUMN: PART_OF_DAY : binning of time of day
       intervals = [(0, 4), (4, 12), (12, 18), (18, 24)]
       labels = ['Late Night', 'Morning', 'Noon', 'Night']
 
       df['part_of_day'] = pd.cut(
-      df['CRASH_TIME'].apply(lambda x: x.hour),
+      df['crash_time'].apply(lambda x: x.hour),
       bins=[x[0] for x in intervals] + [intervals[-1][1]],
       labels=labels,
       right=False
       )
       # FILL null values in zip zode with '0000'
-      df['ZIP_CODE'].fillna(0000 , inplace=True)
+      df['zip_code'].fillna(0000 , inplace=True)
       # fill null values in location with 'UnSpecified'
-      df['LOCATION'].fillna('(0.0, 0.0)', inplace=True)
+      df['location'].fillna('(0.0, 0.0)', inplace=True)
       # fill na values in long and lat with 0
-      df['LONGITUDE'] = df['LONGITUDE'].fillna(0)
-      df['LATITUDE'] = df['LATITUDE'].fillna(0)
+      df['longitude'] = df['longitude'].fillna(0)
+      df['latitude'] = df['latitude'].fillna(0)
       #fill na values in CONTRIBUTING_FACTOR_VEHICLE_1 with 'Unspecifeid'
-      df['CONTRIBUTING_FACTOR_VEHICLE_1'].fillna('Unspecified', inplace=True)
+      df['contributing_factor_vehicle_1'].fillna('Unspecified', inplace=True)
       #fill na values in vehicle type code with 'Unspecified'
-      df['VEHICLE_TYPE_CODE_1'].fillna('Unspecified', inplace=True)
+      df['vehicle_type_code1'].fillna('Unspecified', inplace=True)
 
 
       return df

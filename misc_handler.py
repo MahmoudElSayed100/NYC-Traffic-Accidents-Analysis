@@ -1,21 +1,39 @@
 import pandas as pd
 import requests
+from requests import Response
 from database_handler import execute_query
 import os
 from lookups import ErrorHandling
 from logging_handler import show_error_message
+from datetime import datetime
+from sodapy import Socrata
 
 
-def download_and_read_csv(local_file_path, csv_url): 
-   response = requests.get(csv_url)
-   if response.status_code == 200: #(status success code)
-      with open(local_file_path, 'wb') as file:
-         file.write(response.content)
-      df = pd.read_csv(local_file_path)
-      return df
-   else:
-      print(f"Failed to download CSV. Status code: {response.status_code}")
-      return None
+def download_csv(csv_url, csv_folder):
+    if not os.path.exists(csv_folder):
+        os.makedirs(csv_folder)
+    # Generate today's date in yyyy-mm-dd format
+    today_date = datetime.now().strftime('%Y-%m-%d')
+    file_name = f"{csv_folder}/all_accidents-{today_date}.csv"
+    response = requests.get(csv_url)
+    if response.status_code == 200:#(status success code)
+        with open(file_name, 'wb') as file:
+            file.write(response.content)
+    else:
+        print(f"Failed to download CSV. Status code: {response.status_code}")
+
+
+def get_data_via_api():
+   try:
+        app_token = "iQnHnn5JseouXHtXBQDeMyDch"
+        client = Socrata("data.cityofnewyork.us", app_token, username="mahmoudelsayed121810@gmail.com", password="M@rkseven11")
+        results = client.get("h9gi-nx95", limit=3000000)
+        df = pd.DataFrame.from_records(results)
+        return df
+   except Exception as e:
+       suffix = str(e)
+       error_prefix = ErrorHandling.GET_DATA_FROM_API.value
+       show_error_message(error_prefix, suffix)
    
 
 def execute_sql_folder(db_session, sql_folder_path):
@@ -32,3 +50,4 @@ def execute_sql_folder(db_session, sql_folder_path):
         suffix = str(e)
         error_prefix = ErrorHandling.EXECUTE_SQL_FOLDER.value
         show_error_message(error_prefix, suffix)
+        

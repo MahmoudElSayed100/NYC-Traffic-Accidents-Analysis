@@ -1,4 +1,4 @@
-from database_handler import create_connection, execute_query, close_connection,return_data_as_df
+from database_handler import create_connection, execute_query, close_connection,return_data_as_df, return_insert_into_sql_statement_from_df_stg
 from lookups import DESTINATION_SCHEMA, InputTypes, ErrorHandling
 from logging_handler import show_error_message
 from misc_handler import execute_sql_folder
@@ -25,7 +25,7 @@ def return_etl_last_updated_date(db_session):
    try:
       etl_df = return_data_as_df(file_executor = query, input_type= InputTypes.SQL, db_session= db_session)
       if len(etl_df) == 0:
-         return_date = "2012-07-01"
+         return_date = "2012-06-01"
          does_etl_time_exists = False
       else:
          return_date = etl_df['etl_last_run_date'].iloc[0]
@@ -36,6 +36,15 @@ def return_etl_last_updated_date(db_session):
       show_error_message(error_prefix, suffix)
    finally:
       return return_date, does_etl_time_exists
+   
+def filter_df_by_etl_date(df, etl_date):
+   try:
+      filtered_df = df[df['CRASH_DATE'] > etl_date]
+      return filtered_df
+   except Exception as e:
+      suffix = str(e)
+      error_prefix = ErrorHandling.HOOK_FILTER_DF_BY_ETL_DATE_ERROR.value
+      show_error_message(error_prefix, suffix)
          
 def insert_or_update_etl_checkpoint(db_session,does_etl_time_exists,  etl_date = None):
    schema_destination_table = DESTINATION_SCHEMA.DESTINATION_NAME.value
@@ -47,7 +56,6 @@ def insert_or_update_etl_checkpoint(db_session,does_etl_time_exists,  etl_date =
       update_query = f"""
    INSERT INTO {schema_destination_table}.etl_checkpoint (etl_last_run_date) VALUES ('{etl_date}')
    """
-
    try:
       execute_query(db_session= db_session, query=update_query)
    except Exception as e:
@@ -58,7 +66,8 @@ def insert_or_update_etl_checkpoint(db_session,does_etl_time_exists,  etl_date =
 
 
 
-def excute_hook():
+def execute_hook(df):
+   table_name = "All_Accidents"
    sql_folder_path = r"C:\Users\Admin\Desktop\SEF-Final-Project-NYC-Accidents-Analysis\hook_SQL_commands"
    try:
       print("executing hook")
@@ -66,16 +75,31 @@ def excute_hook():
       print("creating etl checkpoint")
       create_etl_checkpoint(db_session=db_session)
       print("returning last etl updated date")
+
       return_date , does_etl_time_exists = return_etl_last_updated_date(db_session)
-      print("executing hook sql folder")
+
+      df = filter_df_by_etl_date(df , return_date)
+      
+      print("Creating insert into staging tables from df")
+      insert_query = return_insert_into_sql_statement_from_df_stg(df,table_name)
+      print("inserting data into stg")
+      for query in insert_query:
+         execute_query(db_session,query)
+      print("Success")
+
+      print("executing sql folder")
       execute_sql_folder(db_session,sql_folder_path)
+
       print("inserting etl checkpoint")
-      current_date = datetime.now().date()
-      insert_or_update_etl_checkpoint(db_session, does_etl_time_exists, current_date)
+
+
+      newest_date = df['CRASH_DATE'].max().date()
+      insert_or_update_etl_checkpoint(db_session, does_etl_time_exists, newest_date)
       print("done")
       close_connection(db_session=db_session)
    except Exception as e:
       suffix = str(e)
       error_prefix = ErrorHandling.EXECUTE_HOOK_ERROR.value
       show_error_message(error_prefix, suffix)
+
       

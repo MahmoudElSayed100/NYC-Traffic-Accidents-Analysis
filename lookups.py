@@ -22,17 +22,23 @@ class ErrorHandling(Enum):
     CL_HANDLER_REPLACE_NULL_WITH_OTHER = " Error in replace null values in borough with other function"
     CL_HANDLER_REPLACE_NULL_WITH_ON_STR_NAME = " Error in replace null values in borough with ON STREET NAME function"
     CL_HANDLER_REPLACE_NULL_WITH_OFF_STR_NAME = " Error in replace null values in borough with OFF STREET NAME function"
+    CL_HANDLER_REPLACE_NULL_WITH_ZIP_CODE = "Error in replacing null in borough with zipcode function"
     CL_MAIN_FUNCTION = "Error in clean nyc traffic data function"
     RETURN_LAST_ETL_DATE_ERROR = "Error in return last etl updated date, hook "
     RETURN_INSERT_OR_UPDATE_LAST_ETL_ERROR = "Error in insert or update last etl checkpoint function"
     POSTHOOK_CLEANUP_ERROR = "Error in posthook cleanup function"
     EXECUTE_POSTHOOK_ERROR = "Error in execute posthook function"
     EXECUTE_HOOK_ERROR = "Error in execute hook function"
+    HOOK_FILTER_DF_BY_ETL_DATE_ERROR = "Error in filter df by etl date "
+    GET_NEWEST_CSV_FILE = "Error in get newest csv file function"
+    RETURN_DATA_JSON_ERROR = "Error returning JSON"
+    GET_DATA_FROM_API = "Error in get data from API Function"
 
 class InputTypes(Enum):
     SQL = "SQL"
     CSV = "CSV"
     EXCEL = "Excel"
+    JSON = "JSON"
 
 class CSV_FOLDER_PATH(Enum):
     NAME = "csv_tables"
@@ -42,6 +48,4 @@ class DESTINATION_SCHEMA(Enum):
 
 class MAIN_SOURCE_URL(Enum):
    url = "https://data.cityofnewyork.us/api/views/yjf6-ewhz/rows.csv?accessType=DOWNLOAD"
-   
-class FIRST_CSV_FILE_PATH(Enum):
-   local_file_path = r"C:\Users\Admin\Desktop\SEF-Final-Project-NYC-Accidents-Analysis\csv_tables\test.csv"
+   url2 = "https://data.cityofnewyork.us/api/views/h9gi-nx95/rows.csv?accessType=DOWNLOAD"

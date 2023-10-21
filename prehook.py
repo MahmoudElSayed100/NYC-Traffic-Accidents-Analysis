@@ -1,49 +1,85 @@
-from database_handler import create_connection, close_connection, execute_query,return_create_statement_from_df_stg,return_insert_into_sql_statement_from_df_stg
-from misc_handler import download_and_read_csv, execute_sql_folder
-from lookups import ErrorHandling, CSV_FOLDER_PATH
+from database_handler import create_connection, close_connection, execute_query,return_create_statement_from_df_stg,return_data_as_df
+from misc_handler import execute_sql_folder,get_data_via_api,download_csv
+from lookups import ErrorHandling, InputTypes
 from logging_handler import show_error_message
 import os
 from cleaning_dfs_handler import clean_nyc_traffic_data
+from cleaning_dfs_handler_API import clean_nyc_traffic_data_API
+
+def get_newest_csv_file(csv_folder_path):
+    try:
+        files = os.listdir(csv_folder_path)
+        csv_files = [file for file in files if file.endswith(".csv")]
+        if not csv_files:
+            print("No CSV files found in the download folder.")
+            return None
+        # Sort the CSV files by modification time (newest first)
+        csv_files.sort(key=lambda x: os.path.getmtime(os.path.join(csv_folder_path, x)), reverse=True)
+        # Get the path of the newest CSV file
+        newest_csv_file = os.path.join(csv_folder_path, csv_files[0])
+        return newest_csv_file
+    except Exception as e:
+        suffix = str(e)
+        error_prefix = ErrorHandling.GET_NEWEST_CSV_FILE.value
+        show_error_message(error_prefix,suffix)
 
 
-#download, read, clean and create stg tables
-def get_cleaned_data_from_csv_into_staging(db_session):
-    table_name = "All_Accidents"
-    path=r"C:\Users\Admin\Desktop\SEF-Final-Project-NYC-Accidents-Analysis\csv_tables\test.csv"
-    # url = "https://data.cityofnewyork.us/api/views/yjf6-ewhz/rows.csv?accessType=DOWNLOAD"
-    url= "https://data.cityofnewyork.us/api/views/h9gi-nx95/rows.csv?accessType=DOWNLOAD"
-    print("Working on: Download and read")
-    df = download_and_read_csv(path, url)
-    print("Done: Download and read")
-    print("Working on: cleaning df")
-    df = clean_nyc_traffic_data(df)
-    print("Done: Cleaning df")
-    print("Createing create statement query")
-    create_query = return_create_statement_from_df_stg(df,table_name,)
-    print("Executing create statment query")
-    execute_query(db_session,create_query)
-    print("Created staging tables")
-    print("Creating insert into staging tables from df")
-    insert_query = return_insert_into_sql_statement_from_df_stg(df,table_name)
-    print("inserting data into stg")
-    for query in insert_query:
-        execute_query(db_session,query)
-    print("Success")
-
-
-
-
-
-def execute_prehook(sql_folder_path ="SQL_commands"):
-   try:
-      db_session = create_connection()
-
-      execute_sql_folder(db_session , sql_folder_path)
-
-      get_cleaned_data_from_csv_into_staging(db_session)
-
-      close_connection(db_session)
-   except Exception as e:
-       suffix = str(e)
-       error_prefix = ErrorHandling.EXECUTE_PREHOOK_ERROR.value
-       show_error_message(error_prefix,suffix)
+def execute_prehook_csv():
+    df = None
+    csv_folder = r"C:\Users\Admin\Desktop\SEF-Final-Project-NYC-Accidents-Analysis\csv_tables"
+    url = "https://data.cityofnewyork.us/api/views/h9gi-nx95/rows.csv?accessType=DOWNLOAD"
+    sql_folder_path = r"C:\Users\Admin\Desktop\SEF-Final-Project-NYC-Accidents-Analysis\SQL_commands"
+    try:
+        table_name = "All_Accidents"
+        db_session = create_connection()
+        print("executing sql commands")
+        execute_sql_folder(db_session , sql_folder_path)
+        print("Extracting data")
+        download_csv(url,csv_folder)
+        print("done")
+        path = get_newest_csv_file(csv_folder)
+        df = return_data_as_df(path,InputTypes.CSV,db_session)
+        print("Working on: cleaning df")
+        df = clean_nyc_traffic_data(df = df)
+        print("done")
+        print("Createing create statement query")
+        create_query = return_create_statement_from_df_stg(df,table_name)
+        print("Executing create statment query")
+        execute_query(db_session,create_query)
+        print("Created staging tables")
+        close_connection(db_session)
+    except Exception as e:
+        suffix = str(e)
+        error_prefix = ErrorHandling.EXECUTE_PREHOOK_ERROR.value
+        show_error_message(error_prefix,suffix)
+    finally:
+        return df
+    
+def execute_prehook_API():
+    df = None
+    csv_folder = r"C:\Users\Admin\Desktop\SEF-Final-Project-NYC-Accidents-Analysis\csv_tables"
+    url = "https://data.cityofnewyork.us/api/views/h9gi-nx95/rows.csv?accessType=DOWNLOAD"
+    sql_folder_path =r"C:\Users\Admin\Desktop\SEF-Final-Project-NYC-Accidents-Analysis\SQL_commands"
+    try:
+        table_name = "All_Accidents"
+        db_session = create_connection()
+        print("executing sql commands")
+        execute_sql_folder(db_session , sql_folder_path)
+        print("Extracting data")
+        df = get_data_via_api()
+        print("done")
+        print("Working on: cleaning df")
+        df = clean_nyc_traffic_data_API(df)
+        print("done")
+        print("Createing create statement query")
+        create_query = return_create_statement_from_df_stg(df,table_name)
+        print("Executing create statment query")
+        execute_query(db_session,create_query)
+        print("Created staging tables")
+        close_connection(db_session)
+    except Exception as e:
+        suffix = str(e)
+        error_prefix = ErrorHandling.EXECUTE_PREHOOK_ERROR.value
+        show_error_message(error_prefix,suffix)
+    finally:
+        return df
