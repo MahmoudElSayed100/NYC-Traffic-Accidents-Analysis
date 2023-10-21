@@ -9,6 +9,7 @@ config_dict = {
     "user"      : "postgres",
     "password"  : "M@rkseven11"
 }
+
 def create_connection():
     db_session = None
     try:
@@ -34,19 +35,24 @@ def return_query(db_session,query):
     finally:
         return results
     
-def return_data_as_df(file_executor, input_type, db_session = None):
+def return_data_as_df(file_executor, input_type, db_session=None):
     return_dataframe = None
     try:
         if input_type == InputTypes.CSV:
             return_dataframe = pd.read_csv(file_executor)
+        elif input_type == InputTypes.JSON:  # Assuming you have a JSON input type
+            return_dataframe = pd.read_json(file_executor)
         elif input_type == InputTypes.SQL:
-            return_dataframe = pd.read_sql_query(con= db_session, sql= file_executor)
+            return_dataframe = pd.read_sql_query(con=db_session, sql=file_executor)
         else:
             raise Exception("The file type does not exist, please check main function")
     except Exception as e:
         if input_type == InputTypes.CSV:
             suffix = str(e)
             error_prefix = ErrorHandling.RETURN_DATA_CSV_ERROR.value
+        elif input_type == InputTypes.JSON:  # Update error handling for JSON
+            suffix = str(e)
+            error_prefix = ErrorHandling.RETURN_DATA_JSON_ERROR.value
         elif input_type == InputTypes.SQL:
             suffix = str(e)
             error_prefix = ErrorHandling.RETURN_DATA_SQL_ERROR.value
@@ -54,7 +60,8 @@ def return_data_as_df(file_executor, input_type, db_session = None):
             error_prefix = ErrorHandling.RETURN_DATA_UNDEFINED_ERROR.value
             show_error_message(error_prefix, suffix)
     finally:
-         return return_dataframe
+        return return_dataframe
+
 
 def execute_query(db_session, query):
     return_val = ErrorHandling.NO_ERROR
