@@ -130,6 +130,43 @@ def clean_nyc_traffic_data(df):
       suffix = str(e)
       show_error_message(error_prefix, suffix)
 
+def clean_persons_table(df):
+   try:
+      #trip spaces in df
+      df = trim_spaces_in_df(df)
+      #change dtype of date and time and sort it accordingly
+      df['crash_date'] = pd.to_datetime(df['crash_date'])
+      df['crash_time'] = pd.to_datetime(df['crash_time'], format='%H:%M', errors='coerce').dt.time
+      #sort df
+      df.sort_values(by=["crash_date", "crash_time"], ascending=[False, False], inplace=True)
+      df.reset_index(drop=True, inplace=True)
+      #drop unwanted columns
+      columns_to_drop = ['complaint', 'contributing_factor_1', 'contributing_factor_2','position_in_vehicle','ped_location','ped_action']
+      df.drop(columns=columns_to_drop, inplace=True)
+      #fill na 'vehicle_id' with 0000
+      df['vehicle_id'].fillna('0000', inplace=True)
+      #fill na 'person_age' with unspecified
+      df['person_age'].fillna('Unspecified', inplace=True)
+      #fill na 'ejection' with unspecified
+      df['ejection'].fillna('Unspecified', inplace=True)
+      #fill na 'emotional_status' with unspecified
+      df['emotional_status'].fillna('Unspecified', inplace=True)
+      #fill na 'bodily_injury	' with unspecified
+      df['bodily_injury'].fillna('Unspecified', inplace=True)
+      #fill na 'safety_equipment' with unspecified
+      df['safety_equipment'].fillna('Unspecified', inplace=True)
+      #fill na 'ped_role' with unspecified
+      df['ped_role'].fillna('Unspecified', inplace=True)
+      #change other in ped_role with unspec
+      df['ped_role'].replace('Other', 'Unspecified', inplace=True)
+      #fill na 'person_sex' with 'U'
+      df['person_sex'].fillna('U', inplace=True)
+      return df
+   except Exception as e:
+      error_prefix = ErrorHandling.CL2_MAIN_FUNCTION.value
+      suffix = str(e)
+      show_error_message(error_prefix, suffix)
+
 zipcode_to_borough_mapping = {
     10001: "MANHATTAN",
     10451: "BRONX",

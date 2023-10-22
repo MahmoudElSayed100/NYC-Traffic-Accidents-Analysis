@@ -33,6 +33,7 @@ class ErrorHandling(Enum):
     GET_NEWEST_CSV_FILE = "Error in get newest csv file function"
     RETURN_DATA_JSON_ERROR = "Error returning JSON"
     GET_DATA_FROM_API = "Error in get data from API Function"
+    CL2_MAIN_FUNCTION = "Error in cleaning source 2 handler main function "
 
 class InputTypes(Enum):
     SQL = "SQL"

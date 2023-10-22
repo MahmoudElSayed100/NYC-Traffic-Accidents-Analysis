@@ -6,6 +6,7 @@ def posthook_cleanup(db_session):
    destination_table = DESTINATION_SCHEMA.DESTINATION_NAME.value
    query = f"""
    TRUNCATE TABLE {destination_table}.stg_all_accidents RESTART IDENTITY CASCADE;
+   TRUNCATE TABLE {destination_table}.stg_all_injuries RESTART IDENTITY CASCADE;
    """
    try:
       execute_query(db_session=db_session, query=query)
@@ -19,7 +20,7 @@ def execute_posthook():
       db_session = create_connection()
       print("executing post hook")
       posthook_cleanup(db_session=db_session)
-      print("stg tables truncated!")
+      print("stg table 1 truncated!")
       close_connection(db_session=db_session)
       print("Success")
    except Exception as e:

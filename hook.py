@@ -3,6 +3,7 @@ from lookups import DESTINATION_SCHEMA, InputTypes, ErrorHandling
 from logging_handler import show_error_message
 from misc_handler import execute_sql_folder
 from datetime import datetime
+import pandas as pd
 
 #tested
 def create_etl_checkpoint(db_session):
@@ -45,6 +46,15 @@ def filter_df_by_etl_date(df, etl_date):
       suffix = str(e)
       error_prefix = ErrorHandling.HOOK_FILTER_DF_BY_ETL_DATE_ERROR.value
       show_error_message(error_prefix, suffix)
+
+def filter_df_by_etl_date_API(df, etl_date):
+   try:
+      filtered_df = df[df['crash_date'] > etl_date]
+      return filtered_df
+   except Exception as e:
+      suffix = str(e)
+      error_prefix = ErrorHandling.HOOK_FILTER_DF_BY_ETL_DATE_ERROR.value
+      show_error_message(error_prefix, suffix)
          
 def insert_or_update_etl_checkpoint(db_session,does_etl_time_exists,  etl_date = None):
    schema_destination_table = DESTINATION_SCHEMA.DESTINATION_NAME.value
@@ -64,9 +74,57 @@ def insert_or_update_etl_checkpoint(db_session,does_etl_time_exists,  etl_date =
       show_error_message(error_prefix, suffix)
 
 
+def execute_hook(df,df2):
+   table_name = "All_Accidents"
+   table_name2 = "All_Injuries"
+   sql_folder_path = r"C:\Users\Admin\Desktop\SEF-Final-Project-NYC-Accidents-Analysis\hook_SQL_commands"
+   try:
+      print("executing hook")
+      db_session = create_connection()
+      print("creating etl checkpoint")
+      create_etl_checkpoint(db_session=db_session)
+      print("returning last etl updated date")
+
+      return_date , does_etl_time_exists = return_etl_last_updated_date(db_session)
+
+      return_date2 = pd.Timestamp(return_date)
+
+      df = filter_df_by_etl_date(df , return_date)
+
+      df2 = filter_df_by_etl_date_API(df2, return_date2)
+      
+      print("Creating insert into staging tables from source1")
+      insert_query = return_insert_into_sql_statement_from_df_stg(df,table_name)
+      print("inserting data into stg")
+      for query in insert_query:
+         execute_query(db_session,query)
+      print("Success")
+
+      print("Creating insert into staging tables from source2")
+      insert_query2 = return_insert_into_sql_statement_from_df_stg(df2,table_name2)
+      print("inserting data into stg")
+      for query in insert_query2:
+         execute_query(db_session,query)
+      print("Success")
+
+      print("executing sql folder")
+      execute_sql_folder(db_session,sql_folder_path)
+
+      print("inserting etl checkpoint")
 
 
-def execute_hook(df):
+      newest_date = df['CRASH_DATE'].max().date()
+      insert_or_update_etl_checkpoint(db_session, does_etl_time_exists, newest_date)
+      print("done")
+      close_connection(db_session=db_session)
+   except Exception as e:
+      suffix = str(e)
+      error_prefix = ErrorHandling.EXECUTE_HOOK_ERROR.value
+      show_error_message(error_prefix, suffix)
+
+
+
+def execute_hook_API(df):
    table_name = "All_Accidents"
    sql_folder_path = r"C:\Users\Admin\Desktop\SEF-Final-Project-NYC-Accidents-Analysis\hook_SQL_commands"
    try:
@@ -78,7 +136,7 @@ def execute_hook(df):
 
       return_date , does_etl_time_exists = return_etl_last_updated_date(db_session)
 
-      df = filter_df_by_etl_date(df , return_date)
+      df = filter_df_by_etl_date_API(df , return_date)
       
       print("Creating insert into staging tables from df")
       insert_query = return_insert_into_sql_statement_from_df_stg(df,table_name)
