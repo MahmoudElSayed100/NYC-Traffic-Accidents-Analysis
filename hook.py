@@ -76,7 +76,7 @@ def insert_or_update_etl_checkpoint(db_session,does_etl_time_exists,  etl_date =
 
 def execute_hook(df,df2):
    table_name = "All_Accidents"
-   table_name2 = "All_Injuries"
+   table_name2 = "all_injuries"
    sql_folder_path = r"C:\Users\Admin\Desktop\SEF-Final-Project-NYC-Accidents-Analysis\hook_SQL_commands"
    try:
       print("executing hook")
