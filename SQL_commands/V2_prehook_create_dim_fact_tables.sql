@@ -53,7 +53,31 @@ CREATE TABLE IF NOT EXISTS traffic_accidents.fact_accidents (
     main_cause TEXT
 );
 
+CREATE TABLE IF NOT EXISTS traffic_accidents.dim_person (
+    person_id TEXT  PRIMARY KEY,
+    collision_id INT,
+    person_sex TEXT,
+    person_age TEXT,
+    person_type TEXT
+);
+
+CREATE TABLE IF NOT EXISTS traffic_accidents.fact_injuries (
+    injury_id TEXT PRIMARY KEY,
+    person_id TEXT REFERENCES traffic_accidents.dim_person(person_id),
+    collision_id INT ,
+    vehicle_id VARCHAR(70),
+    bodily_injury TEXT,
+    safety_equipment TEXT,
+    ejection TEXT,
+    emotional_status TEXT,
+    pedestrian_role TEXT
+);
+
+
+
 CREATE INDEX IF NOT EXISTS idx_collision_id ON traffic_accidents.dim_accident_cause(collision_id);
 CREATE INDEX IF NOT EXISTS idx_collision_id_location ON traffic_accidents.dim_location(collision_id);
 CREATE INDEX IF NOT EXISTS idx_collision_id_victims ON traffic_accidents.dim_victims(collision_id);
 CREATE INDEX IF NOT EXISTS idx_collision_id_fct_accidents ON traffic_accidents.fact_accidents(collision_id);
+CREATE INDEX IF NOT EXISTS idx_person_id_injuries ON traffic_accidents.fact_injuries(injury_id);
+CREATE INDEX IF NOT EXISTS idx_person_id ON traffic_accidents.dim_person(person_id);
