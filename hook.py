@@ -80,15 +80,19 @@ def execute_hook(df,df2):
    sql_folder_path = r"C:\Users\Admin\Desktop\SEF-Final-Project-NYC-Accidents-Analysis\hook_SQL_commands"
    try:
       print("executing hook")
+      df2.head()
       db_session = create_connection()
+      df2.head()
       print("creating etl checkpoint")
       create_etl_checkpoint(db_session=db_session)
       print("returning last etl updated date")
 
       return_date , does_etl_time_exists = return_etl_last_updated_date(db_session)
-
-      return_date2 = pd.Timestamp(return_date)
-
+      print(return_date)
+      return_date2 = pd.to_datetime(return_date)
+      print(return_date2)
+      return_date2 = return_date2.dt.date
+      print(return_date2)
       df = filter_df_by_etl_date(df , return_date)
 
       df2 = filter_df_by_etl_date_API(df2, return_date2)
