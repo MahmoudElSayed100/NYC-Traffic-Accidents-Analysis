@@ -268,7 +268,7 @@ A main interface for viewers to explore:
 
 **Dependencies**:
 
--   Install the necessary Python libraries: `pandas`, `numpy`, `pyscobg2`, `os`, `requests`, etc.
+-   Install the necessary Python libraries: `pandas`, `numpy`, `pyscobg2`, `os`, `requests`.
 -   Install database connectors/drivers for PostgreSQL.
   
 
