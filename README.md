@@ -143,6 +143,7 @@ Bin Tracker is built using the following technologies:
 ## Frontend
 
 Interactive PowerBI Dashboard:
+
 A central dashboard where viewers can view:
 
 1. Traffic Accident Trends: Graphs, charts, and visualizations showcasing key traffic accident metrics over time.
