@@ -55,7 +55,7 @@
 
 	I want to query the database.
 
-	I want to create interactive dashboards for data visualization.
+	I want to access interactive dashboards for data visualization.
 
 3. As a Traffic Engineer:
 
