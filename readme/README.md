@@ -18,7 +18,7 @@
 
 > A python based ETL project that would extract, transform data from different web sources and load them into a tabular database (PostgreSQL) in an attempt to provide a full scope analytical understanding of the USA recession. 
 
->USA Recession Analysis and Prediction Project, also aims to predict the probabilities of when this might occur in the near future based on the historical data analyzed.
+>NYC Traffic Accidents Analysis Project aims to analyze historical and current data to gain insights into accident patterns and trends, providing valuable information for improving road safety and traffic management.
 <br>
 
   
@@ -29,9 +29,9 @@
 
 1. Data Engineers.
 2. Data Analysts.
-3. Economists.
-4. Policy Makers.
-5. Journalist.
+3. Traffic Engineers.
+4. Public Safety Advocates.
+5. Governmental Organizations.
   
 
 <br>
@@ -42,23 +42,25 @@
 
   
 1. As a Data Engineer:
-	I want to automatically scrape various economic indicators from reputable sources so that our dataset is always up-to-date.
-	I want to integrate different data sources seamlessly.
-	Ensure fault tolerance in our data pipelines, so that potential failures don't interrupt our analyses.
+	I want to ensure that NYC traffic accidents data is collected, stored, and processed efficiently.
+	I want to automate data retrieval from various sources for real-time analysis.
+	I want to build and maintain robust data pipelines to ensure data accuracy.
 2. As an Analyst:
+	I want to explore and analyze NYC traffic accidents data to identity patterns and trends.
 	I want to query the database.
-	I want to view the sentiment analysis results to understand public sentiment around economic conditions.
-	I want to visualize the data using PowerBI.
-3. As an Economist:
-	I want to access a dataset that provides a holistic view of the US economic landscape post-COVID-19.
-	I want to compare model's projections with other economic forecasts to ensure accuracy and reliability.
-4. As a Policy Maker:
-	I want to understand if the US is still in recession to make informed decisions about economic policies.
-	I want to view reports highlighting key economic indicators and their trend over time.
-5. As a Journalist:
-	I want to access clear visualizations.
-	I want to understand public sentiments.
-	I want an access on the historical view of the economic indicators to showcase trends.
+	I want to create interactive dashboards for data visualization.
+3. As a Traffic Engineer:
+	I want access to detailed traffic accident data for traffic management and safety improvements.
+	I want to analyze traffic accident hotspots and identify areas that require infrastructure changes.
+	I want historical data to monitor the impact of traffic interventions.
+4. As a Public Safety Advocate:
+	I want to use traffic accident data to raise public awareness about safety issues.
+	I want to identify areas with high accident rates and advocate for safety improvements.
+	I want to collaborate with local authorities to address safety concerns.
+5. As a Governmental Organization:
+	I want comprehensive traffic accident data to inform policy decisions and resource allocation.
+	I want to assess the effectiveness of traffic safety measures over time.
+	I want access to real-time data for emergency response coordination and traffic management.
 
 
 <br><br>
@@ -124,10 +126,11 @@ Bin Tracker is built using the following technologies:
 Interactive PowerBI Dashboard:
 A central dashboard where viewers can view:
 
-1. Economic Indicators: Graphs, charts and visualizations displaying key economic metrics over time.
-2. Sentiment Analysis: Representations of public sentiment about economic conditions, perhaps through heat maps, pie charts, or sentiment bars.
-3. Predictive Analysis: A visualization of the ML model's performance about he US econmoic recovery compared to actual data.
-4. Interactive filters: options to filter data by date, region, or specific economic indicatiors for customized views.
+1. Traffic Accident Trends: Graphs, charts, and visualizations showcasing key traffic accident metrics over time.
+2. Location Analysis with Maps: Visual representations of accident locations by borough, street, and geographical coordinates, complete with interactive maps.
+3. Demographic Insights: Data visualizations highlighting trends in the age, gender, and role of individuals involved in accidents.
+4. Victim Summary: Summary data on total victims, injuries, and fatalities, providing insights into the impact of accidents.
+5. Custom Filters: Options for customizing views by date, location, or specific accident characteristics
 
 
   
@@ -138,10 +141,9 @@ A central dashboard where viewers can view:
 
 ## Backend
 
-1. Web scraping & Automation.
+1. Data Retrieval & API Integration: Utilizing the Socrata API to retrieve traffic accident data from authoritative sources.
 2. ETL Pipeline: using python and pandas, raw data is extracted, transformed into a usable format and loaded into postgreSQL database.
-3. Database: Schema Design - Indexing - Data Integrity - Backup & Recovery.
-4. Machine Learning & Predictive Analysis: Model Training - Evaluation and Prediction.  
+3. Database: Schema Design - Indexing - Data Integrity - Backup & Recovery. 
 
 <br>
 
@@ -246,7 +248,7 @@ Using Keras, we analyze the historical economic data, training predictive models
 <img  src="./readme/title6.svg" id="run"/>
   
 
-> To set up ## **USA Recession Analysis and Prediction** follow these steps:
+> To set up ## **NYC Traffic Accidents Analysis** follow these steps:
 
 ### Prerequisites
 
@@ -261,7 +263,7 @@ Using Keras, we analyze the historical economic data, training predictive models
 
 **Dependencies**:
 
--   Install the necessary Python libraries: `pandas`, `scikit-learn`, `selenium`, `BeautifulSoup`, etc.
+-   Install the necessary Python libraries: `pandas`, `numpy`, `pyscobg2`, `os`, `requests`, etc.
 -   Install database connectors/drivers for PostgreSQL.
   
 
@@ -272,7 +274,7 @@ Using Keras, we analyze the historical economic data, training predictive models
 
 ```sh
 
-git clone https://github.co/your-repo-link/usa-recession-analysis.git
+git clone https://github.com/MahmoudElSayed100/SEF-Final-Project-NYC-Accidents-Analysis.git
 
 ```
 
