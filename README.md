@@ -144,10 +144,10 @@ Bin Tracker is built using the following technologies:
 
 Interactive PowerBI Dashboard:
 
-A central dashboard where viewers can view:
+A main interface for viewers to explore:
 
 1. Traffic Accident Trends: Graphs, charts, and visualizations showcasing key traffic accident metrics over time.
-2. Location Analysis : Visual representations of NYC Map including accident locations by borough, street, and geographical coordinates, complete with interactive map.
+2. Location Analysis : Visual representations of NYC Map including accident locations by borough, street, and geographical coordinates, with interactive map.
 3. Demographic Insights: Data visualizations highlighting trends in the age, gender, and role of individuals involved in accidents.
 4. Victim Summary: Summary data on total victims, injuries, and fatalities, providing insights into the impact of accidents.
 5. Custom Filters: Options for customizing views by date, location, or specific accident characteristics
