@@ -16,7 +16,7 @@
 <a  name="philosophy" ></a>
 <img  src="./readme/title2.svg" id="project-philosophy"/>
 
-> A python based ETL project that would extract, transform data from different web sources and load them into a tabular database (PostgreSQL) in an attempt to provide a full scope analytical understanding of the USA recession. 
+> A python based ETL project that would extract, transform data from different web sources and load them into a tabular database (PostgreSQL) in an attempt to provide a full scope analytical understanding of the NYC traffic accidents. 
 
 >NYC Traffic Accidents Analysis Project aims to analyze historical and current data to gain insights into accident patterns and trends, providing valuable information for improving road safety and traffic management.
 <br>
@@ -80,7 +80,7 @@
 	I want to assess the effectiveness of traffic safety measures over time.
 
 	I want access to real-time data for emergency response coordination and traffic management.
-	
+
 
 
 <br><br>
