@@ -59,11 +59,11 @@
 
 3. As a Traffic Engineer:
 
-	I want access to detailed traffic accident data for traffic management and safety improvements.
+	I want to have access to detailed traffic accident data for traffic management and safety improvements.
 
 	I want to analyze traffic accident hotspots and identify areas that require infrastructure changes.
 
-	I want historical data to monitor the impact of traffic interventions.
+	I want to monitor the impact of traffic interventions through historical data.
 
 4. As a Public Safety Advocate:
 
@@ -75,11 +75,11 @@
 
 5. As a Governmental Organization:
 
-	I want comprehensive traffic accident data to inform policy decisions and resource allocation.
+	I want to have access to comprehensive traffic accident data to inform policy decision makers and resource allocation.
 
 	I want to assess the effectiveness of traffic safety measures over time.
 
-	I want access to real-time data for emergency response coordination and traffic management.
+	I want to have access to real-time data for emergency response coordination and traffic management.
 
 
 
