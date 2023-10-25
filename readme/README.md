@@ -68,8 +68,7 @@
 <!-- Prototyping -->
 <img  src="./readme/title3.svg"  id="prototyping"/>
 
-> We have designed our projects to webscrape, through an ETL project and including it in a PowerBI Sample Dashboard, 
-
+> We have designed our project to obtain data through an ETL process, and we've included it in a PowerBI Sample Dashboard,
   
 
 ### Logger File
@@ -127,7 +126,7 @@ Interactive PowerBI Dashboard:
 A central dashboard where viewers can view:
 
 1. Traffic Accident Trends: Graphs, charts, and visualizations showcasing key traffic accident metrics over time.
-2. Location Analysis with Maps: Visual representations of accident locations by borough, street, and geographical coordinates, complete with interactive maps.
+2. Location Analysis : Visual representations of NYC Map including accident locations by borough, street, and geographical coordinates, complete with interactive map.
 3. Demographic Insights: Data visualizations highlighting trends in the age, gender, and role of individuals involved in accidents.
 4. Victim Summary: Summary data on total victims, injuries, and fatalities, providing insights into the impact of accidents.
 5. Custom Filters: Options for customizing views by date, location, or specific accident characteristics
@@ -216,22 +215,7 @@ A central dashboard where viewers can view:
 
 <br><br>
 
-### Machine Learning (ML) component
-Using Keras, we analyze the historical economic data, training predictive models and deploying them for real-time predictions.
 
-  Data Collection & Preprocessing.
-  Model Selection & Training
-  Model Evaluation.
-  Model Deployment
-  
-
-| ML Flow Diagram|
-
-| ---| ---|
-
-|![fsdaf](./readme/implementation/arduino.gif)|![fsdaf](./readme/implementation/circuit.png)
-
-  
 
 | Data Transfer Demo |
 
