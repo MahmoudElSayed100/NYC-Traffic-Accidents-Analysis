@@ -42,25 +42,45 @@
 
   
 1. As a Data Engineer:
+
 	I want to ensure that NYC traffic accidents data is collected, stored, and processed efficiently.
+
 	I want to automate data retrieval from various sources for real-time analysis.
+
 	I want to build and maintain robust data pipelines to ensure data accuracy.
+
 2. As an Analyst:
+
 	I want to explore and analyze NYC traffic accidents data to identity patterns and trends.
+
 	I want to query the database.
+
 	I want to create interactive dashboards for data visualization.
+
 3. As a Traffic Engineer:
+
 	I want access to detailed traffic accident data for traffic management and safety improvements.
+
 	I want to analyze traffic accident hotspots and identify areas that require infrastructure changes.
+
 	I want historical data to monitor the impact of traffic interventions.
+
 4. As a Public Safety Advocate:
+
 	I want to use traffic accident data to raise public awareness about safety issues.
+
 	I want to identify areas with high accident rates and advocate for safety improvements.
+
 	I want to collaborate with local authorities to address safety concerns.
+
 5. As a Governmental Organization:
+
 	I want comprehensive traffic accident data to inform policy decisions and resource allocation.
+
 	I want to assess the effectiveness of traffic safety measures over time.
+
 	I want access to real-time data for emergency response coordination and traffic management.
+	
 
 
 <br><br>
@@ -232,7 +252,7 @@ A central dashboard where viewers can view:
 <img  src="./readme/title6.svg" id="run"/>
   
 
-> To set up ## **NYC Traffic Accidents Analysis** follow these steps:
+> To set up **NYC Traffic Accidents Analysis** follow these steps:
 
 ### Prerequisites
 
