@@ -21,4 +21,16 @@ SELECT
 FROM
     AccidentAggregates AS a;
 
+--AGG YEARLY INJURED - KILLED
+CREATE TABLE traffic_accidents.agg_yearly_killed_injured AS
+SELECT
+    EXTRACT(YEAR FROM crash_date) AS year,
+    SUM(total_killed) AS total_killed,
+    SUM(total_injured) AS total_injured
+FROM
+    traffic_accidents.fact_accidents
+GROUP BY
+    year
+ORDER BY
+    year
 
