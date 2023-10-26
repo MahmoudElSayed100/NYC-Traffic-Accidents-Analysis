@@ -8,22 +8,3 @@ def etl_run():
    df,df2 = execute_prehook_csv()
    execute_hook(df,df2)
    execute_posthook()
-
-def etl_run_API():
-   df = execute_prehook_API()
-   execute_hook_API(df)
-   execute_posthook()
-
-# def etl_job():
-#     print("Running ETL...")
-#     start_time = time.time() 
-#     etl_run()
-#     end_time = time.time()
-#     elapsed_time = end_time - start_time
-#     print(f"ETL complete! Time elapsed: {elapsed_time:.2f} seconds")
-   
-# schedule.every(26).minutes.do(etl_job)
-
-# while True:
-#     schedule.run_pending()
-#     time.sleep(1)
