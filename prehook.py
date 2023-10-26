@@ -43,7 +43,7 @@ def execute_prehook_csv():
         print("executing sql commands")
         execute_sql_folder(db_session , sql_folder_path)
         print("Extracting data from source 1")
-        download_csv(url,csv_folder)
+        # download_csv(url,csv_folder)
         print("done")
         print("Extracting data from source 2")
         df2 = get_and_read_source2_data_api()
