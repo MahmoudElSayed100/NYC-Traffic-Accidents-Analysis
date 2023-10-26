@@ -20,21 +20,7 @@ def download_csv(csv_url, csv_folder):
         with open(file_name, 'wb') as file:
             file.write(response.content)
     else:
-        print(f"Failed to download CSV. Status code: {response.status_code}")
-
-
-def get_data_via_api():
-   try:
-        app_token = "iQnHnn5JseouXHtXBQDeMyDch"
-        client = Socrata("data.cityofnewyork.us", app_token, username="mahmoudelsayed121810@gmail.com", password="M@rkseven11")
-        results = client.get("h9gi-nx95", limit=3000000)
-        df = pd.DataFrame.from_records(results)
-        return df
-   except Exception as e:
-       suffix = str(e)
-       error_prefix = ErrorHandling.GET_DATA_FROM_API.value
-       show_error_message(error_prefix, suffix)
-   
+        print(f"Failed to download CSV. Status code: {response.status_code}")   
 
 def execute_sql_folder(db_session, sql_folder_path):
     try:
