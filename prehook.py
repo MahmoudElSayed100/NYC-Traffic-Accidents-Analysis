@@ -34,7 +34,7 @@ def get_and_read_source2_data_api():
 
 def execute_prehook_csv():
     df = None
-    csv_folder = r'C:\Users\Admin\Desktop\NYC-TRAFFIC-ACCIDENTS-PROJECT\csv_tables'
+    csv_folder = './csv_tables'
     url = "https://data.cityofnewyork.us/api/views/h9gi-nx95/rows.csv?accessType=DOWNLOAD"
     sql_folder_path = 'SQL_commands'
     try:
@@ -73,31 +73,3 @@ def execute_prehook_csv():
         error_prefix = ErrorHandling.EXECUTE_PREHOOK_ERROR.value
         show_error_message(error_prefix,suffix)
     
-def execute_prehook_API():
-    df = None
-    csv_folder = r"C:\Users\Admin\Desktop\SEF-Final-Project-NYC-Accidents-Analysis\csv_tables"
-    url = "https://data.cityofnewyork.us/api/views/h9gi-nx95/rows.csv?accessType=DOWNLOAD"
-    sql_folder_path =r"C:\Users\Admin\Desktop\SEF-Final-Project-NYC-Accidents-Analysis\SQL_commands"
-    try:
-        table_name = "All_Accidents"
-        db_session = create_connection()
-        print("executing sql commands")
-        execute_sql_folder(db_session , sql_folder_path)
-        print("Extracting data")
-        df = get_data_via_api()
-        print("done")
-        print("Working on: cleaning df")
-        df = clean_nyc_traffic_data_API(df)
-        print("done")
-        print("Createing create statement query")
-        create_query = return_create_statement_from_df_stg(df,table_name)
-        print("Executing create statment query")
-        execute_query(db_session,create_query)
-        print("Created staging tables")
-        close_connection(db_session)
-    except Exception as e:
-        suffix = str(e)
-        error_prefix = ErrorHandling.EXECUTE_PREHOOK_ERROR.value
-        show_error_message(error_prefix,suffix)
-    finally:
-        return df
