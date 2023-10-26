@@ -1,10 +1,9 @@
 from database_handler import create_connection, close_connection, execute_query,return_create_statement_from_df_stg,return_data_as_df
-from misc_handler import execute_sql_folder,get_data_via_api,download_csv
+from misc_handler import execute_sql_folder,download_csv
 from lookups import ErrorHandling, InputTypes
 from logging_handler import show_error_message
 import os
 from cleaning_dfs_handler import clean_nyc_traffic_data, clean_persons_table
-from cleaning_dfs_handler_API import clean_nyc_traffic_data_API
 import requests
 import pandas as pd
 
