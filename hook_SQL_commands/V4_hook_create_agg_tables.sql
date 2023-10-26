@@ -2,9 +2,7 @@ CREATE TABLE IF NOT EXISTS traffic_accidents.agg_yearly_accidents AS
 WITH AccidentAggregates AS (
     SELECT
         EXTRACT(YEAR FROM crash_date) AS year,
-        COUNT(collision_id) AS total_crashes,
-        LAG(COUNT(collision_id)) OVER (ORDER BY EXTRACT(YEAR FROM crash_date)) AS last_year_crashes,
-        SUM(COUNT(collision_id)) OVER (ORDER BY EXTRACT(YEAR FROM crash_date)) AS running_total
+        COUNT(collision_id) AS total_crashes
     FROM
         traffic_accidents.fact_accidents
     GROUP BY
@@ -13,13 +11,14 @@ WITH AccidentAggregates AS (
 SELECT
     a.year,
     a.total_crashes,
-    a.last_year_crashes,
-    a.running_total,
+    LAG(a.total_crashes) OVER (ORDER BY a.year) AS last_year_crashes,
     CASE
         WHEN LAG(a.total_crashes) OVER (ORDER BY a.year) IS NOT NULL THEN
-            ((a.total_crashes - LAG(a.total_crashes) OVER (ORDER BY a.year)) / LAG(a.total_crashes) OVER (ORDER BY a.year)) * 100
+            ROUND(((a.total_crashes - LAG(a.total_crashes) OVER (ORDER BY a.year)) * 100.0 / LAG(a.total_crashes) OVER (ORDER BY a.year)), 1)
         ELSE
             NULL
     END AS percent_difference
 FROM
     AccidentAggregates AS a;
+
+
