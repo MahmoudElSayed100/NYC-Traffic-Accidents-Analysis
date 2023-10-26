@@ -21,6 +21,7 @@ def execute_posthook():
       print("executing post hook")
       posthook_cleanup(db_session=db_session)
       print("stg table 1 truncated!")
+      print("stg table 2 truncated!")
       close_connection(db_session=db_session)
       print("Success")
    except Exception as e:
