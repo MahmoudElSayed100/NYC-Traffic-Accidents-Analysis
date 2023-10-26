@@ -1,12 +1,9 @@
-import pandas as pd
 import requests
-from requests import Response
 from database_handler import execute_query
 import os
 from lookups import ErrorHandling
 from logging_handler import show_error_message
 from datetime import datetime
-from sodapy import Socrata
 
 
 def download_csv(csv_url, csv_folder):
