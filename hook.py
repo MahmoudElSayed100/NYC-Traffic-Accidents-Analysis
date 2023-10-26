@@ -5,7 +5,7 @@ from misc_handler import execute_sql_folder
 from datetime import datetime
 import pandas as pd
 
-#tested
+
 def create_etl_checkpoint(db_session):
    schema_destination_table = DESTINATION_SCHEMA.DESTINATION_NAME.value
    # INSEATE OF etl_last_run_date timestamp, it's Date in order to put the last crash date
@@ -128,40 +128,5 @@ def execute_hook(df,df2):
 
 
 
-def execute_hook_API(df):
-   table_name = "All_Accidents"
-   sql_folder_path = r"C:\Users\Admin\Desktop\SEF-Final-Project-NYC-Accidents-Analysis\hook_SQL_commands"
-   try:
-      print("executing hook")
-      db_session = create_connection()
-      print("creating etl checkpoint")
-      create_etl_checkpoint(db_session=db_session)
-      print("returning last etl updated date")
-
-      return_date , does_etl_time_exists = return_etl_last_updated_date(db_session)
-
-      df = filter_df_by_etl_date_API(df , return_date)
-      
-      print("Creating insert into staging tables from df")
-      insert_query = return_insert_into_sql_statement_from_df_stg(df,table_name)
-      print("inserting data into stg")
-      for query in insert_query:
-         execute_query(db_session,query)
-      print("Success")
-
-      print("executing sql folder")
-      execute_sql_folder(db_session,sql_folder_path)
-
-      print("inserting etl checkpoint")
-
-
-      newest_date = df['CRASH_DATE'].max().date()
-      insert_or_update_etl_checkpoint(db_session, does_etl_time_exists, newest_date)
-      print("done")
-      close_connection(db_session=db_session)
-   except Exception as e:
-      suffix = str(e)
-      error_prefix = ErrorHandling.EXECUTE_HOOK_ERROR.value
-      show_error_message(error_prefix, suffix)
 
       
