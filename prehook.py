@@ -31,7 +31,7 @@ def get_and_read_source2_data_api():
     return df
 
 
-def execute_prehook_csv():
+def execute_prehook():
     df = None
     csv_folder = './csv_tables'
     url = "https://data.cityofnewyork.us/api/views/h9gi-nx95/rows.csv?accessType=DOWNLOAD"
