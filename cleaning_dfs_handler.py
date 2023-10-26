@@ -90,7 +90,6 @@ def clean_nyc_traffic_data(df):
       #Replace NaN values in borough with on street name
       df = replace_null_borough_with_on_street_name(df, street_borough_mapping)
       #Replace Nan values in borough with off street name
-      df = replace_null_borough_with_off_street(df, street_borough_mapping)
       #Drop columns borough is na (no way to find the borough)
       df.dropna(subset=['BOROUGH'], inplace=True)
       #NEW COLUMN: main street ( displayed street )
