@@ -1,7 +1,7 @@
 import requests
 from database_handler import execute_query
 import os
-from lookups import ErrorHandling
+from lookups import ErrorHandling, ETLStep
 from logging_handler import show_error_message
 from datetime import datetime
 
