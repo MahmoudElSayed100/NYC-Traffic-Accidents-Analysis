@@ -1,6 +1,6 @@
 from database_handler import create_connection, close_connection, execute_query,return_create_statement_from_df_stg,return_data_as_df
 from misc_handler import execute_sql_folder,download_csv
-from lookups import ErrorHandling, InputTypes
+from lookups import ErrorHandling, InputTypes, ETLStep
 from logging_handler import show_error_message
 import os
 from cleaning_dfs_handler import clean_nyc_traffic_data, clean_persons_table
@@ -38,13 +38,14 @@ def execute_prehook():
     df = None
     csv_folder = './csv_tables'
     url = "https://data.cityofnewyork.us/api/views/h9gi-nx95/rows.csv?accessType=DOWNLOAD"
-    sql_folder_path = 'SQL_commands'
+    sql_folder_path = './SQL_commands'
+    etl_step = ETLStep.PREHOOK
     try:
         table_name = "All_Accidents"
         table_name2 = "All_Injuries"
         db_session = create_connection()
         print("executing sql commands")
-        execute_sql_folder(db_session, sql_folder_path)
+        execute_sql_folder(db_session, sql_folder_path, etl_step)
         print(f"Time taken for execute_sql_folder: {time.time() - start_time} seconds")
 
         start_time = time.time()  
