@@ -1,0 +1,26 @@
+INFO:root:Time taken for execute_sql_folder: 0.17989420890808105 seconds
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): data.cityofnewyork.us:443
+DEBUG:urllib3.connectionpool:https://data.cityofnewyork.us:443 "GET /api/views/h9gi-nx95/rows.csv?accessType=DOWNLOAD HTTP/1.1" 200 None
+INFO:root:Time taken for download_csv: 148.51627254486084 seconds
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): data.cityofnewyork.us:443
+DEBUG:urllib3.connectionpool:https://data.cityofnewyork.us:443 "GET /resource/f55k-p6yu.json?$where=crash_date%20%3E=%20'2020-01-01T00:00:00'&%24limit=10000000 HTTP/1.1" 200 None
+INFO:root:Time taken for get_and_read_source2_data_api: 101.89095568656921 seconds
+INFO:root:Time taken for return_data_as_df: 7.375606298446655 seconds
+INFO:root:Time taken for clean_nyc_traffic_data: 117.16861152648926 seconds
+INFO:root:Time taken for clean_persons_table: 13.845361471176147 seconds
+INFO:root:Time taken for return_create_statement_from_df_stg (source 1): 0.00250244140625 seconds
+INFO:root:Time taken for execute_query (source 1): 0.03282284736633301 seconds
+INFO:root:Time taken for return_create_statement_from_df_stg (source 2): 0.0 seconds
+INFO:root:Time taken for execute_query (source 2): 0.006406545639038086 seconds
+INFO:root:Time taken for create_connection: 0.03964686393737793 seconds
+INFO:root:Time taken for create_etl_checkpoint: 0.004992485046386719 seconds
+INFO:root:Time taken for return_etl_last_updated_date: 0.002496480941772461 seconds
+INFO:root:Time taken for filter_df_by_etl_date: 1.1080131530761719 seconds
+INFO:root:Time taken for filter_df_by_etl_date_API: 1.3542678356170654 seconds
+INFO:root:Time taken for return_insert_into_sql_statement_from_df_stg (source1): 135.53640031814575 seconds
+INFO:root:Time taken for inserting data into stg from source 1: 596.376312494278 seconds
+INFO:root:Time taken for return_insert_into_sql_statement_from_df_stg (source2): 86.43754076957703 seconds
+INFO:root:Time taken for inserting data into stg from source 2: 400.2717971801758 seconds
+INFO:root:Time taken for execute_sql_folder: 248.27963399887085 seconds
+INFO:root:Time taken for insert_or_update_etl_checkpoint: 0.010018110275268555 seconds
+INFO:root:Time taken for execute_posthook : 0.15058088302612305
