@@ -1,3 +1,4 @@
+import logging
 from database_handler import create_connection, execute_query, close_connection,return_data_as_df, return_insert_into_sql_statement_from_df_stg
 from lookups import DESTINATION_SCHEMA, InputTypes, ErrorHandling, ETLStep
 from logging_handler import show_error_message
@@ -85,60 +86,65 @@ def execute_hook(df, df2):
         start_time = time.time()  
         print("executing hook")
         db_session = create_connection()
-        print(f"Time taken for create_connection: {time.time() - start_time} seconds")
+        logging.info(f"Time taken for create_connection: {time.time() - start_time} seconds")
 
         start_time = time.time()
         print("creating etl checkpoint")
         create_etl_checkpoint(db_session=db_session)
-        print(f"Time taken for create_etl_checkpoint: {time.time() - start_time} seconds")
+        logging.info(f"Time taken for create_etl_checkpoint: {time.time() - start_time} seconds")
 
         start_time = time.time()
         print("returning last etl updated date")
         return_date, does_etl_time_exists = return_etl_last_updated_date(db_session)
         return_date = pd.to_datetime(return_date)
-        print(f"Time taken for return_etl_last_updated_date: {time.time() - start_time} seconds")
+        logging.info(f"Time taken for return_etl_last_updated_date: {time.time() - start_time} seconds")
         print(return_date)
 
         start_time = time.time()
         df = filter_df_by_etl_date(df, return_date)
         return_date
-        print(f"Time taken for filter_df_by_etl_date: {time.time() - start_time} seconds")
+        logging.info(f"Time taken for filter_df_by_etl_date: {time.time() - start_time} seconds")
 
         start_time = time.time()
         df2 = filter_df_by_etl_date_API(df2, return_date)
-        print(f"Time taken for filter_df_by_etl_date_API: {time.time() - start_time} seconds")
+        logging.info(f"Time taken for filter_df_by_etl_date_API: {time.time() - start_time} seconds")
 
         start_time = time.time()
         print("Creating insert into staging tables from source1")
         insert_query = return_insert_into_sql_statement_from_df_stg(df, table_name)
-        print(f"Time taken for return_insert_into_sql_statement_from_df_stg (source1): {time.time() - start_time} seconds")
+        logging.info(f"Time taken for return_insert_into_sql_statement_from_df_stg (source1): {time.time() - start_time} seconds")
+
+        start_time = time.time()
         print("inserting data into stg")
         for query in insert_query:
             execute_query(db_session, query)
+        logging.info(f"Time taken for inserting data into stg from source 1: {time.time() - start_time} seconds")
         print("Success")
 
         start_time = time.time()
         print("Creating insert into staging tables from source2")
         insert_query2 = return_insert_into_sql_statement_from_df_stg(df2, table_name2)
-        print(f"Time taken for return_insert_into_sql_statement_from_df_stg (source2): {time.time() - start_time} seconds")
+        logging.info(f"Time taken for return_insert_into_sql_statement_from_df_stg (source2): {time.time() - start_time} seconds")
+
+        start_time = time.time()
         print("inserting data into stg")
         for query in insert_query2:
             execute_query(db_session, query)
+        logging.info(f"Time taken for inserting data into stg from source 2: {time.time() - start_time} seconds")
         print("Success")
 
         start_time = time.time()
         print("executing sql folder")
         execute_sql_folder(db_session, sql_folder_path, etl_step)
-        print(f"Time taken for execute_sql_folder: {time.time() - start_time} seconds")
+        logging.info(f"Time taken for execute_sql_folder: {time.time() - start_time} seconds")
 
         print("inserting etl checkpoint")
-
         start_time = time.time()
         newest_date = df['CRASH_DATE'].max().date()
         insert_or_update_etl_checkpoint(db_session, does_etl_time_exists, newest_date)
-        print(f"Time taken for insert_or_update_etl_checkpoint: {time.time() - start_time} seconds")
+        logging.info(f"Time taken for insert_or_update_etl_checkpoint: {time.time() - start_time} seconds")
 
-        print("done")
+        print("Done")
 
         close_connection(db_session=db_session)
     except Exception as e:
