@@ -8,9 +8,9 @@ WITH PersonVictimsCTE AS (
         v.total_persons_killed,
         v.total_persons_injured
     FROM
-        traffic_accidents.dim_person AS p
+        traffic_accidents1.dim_person AS p
     INNER JOIN
-        traffic_accidents.dim_victims AS v ON p.collision_id = v.collision_id
+        traffic_accidents1.dim_victims AS v ON p.collision_id = v.collision_id
 )
 SELECT *
 FROM PersonVictimsCTE;
