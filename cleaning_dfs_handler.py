@@ -85,11 +85,8 @@ def clean_nyc_traffic_data(df):
       df = remove_spaces_from_columns_df(df)
       #trim spaces in df
       df = trim_spaces_in_df(df)
-      #Replace NaN values in 'BOROUGH' when specific conditions are met #DROPED ALL SINCE THEY'RE MINIMAL(91K OUT OF 2.3M)
-      # df['BOROUGH'] = df.apply(replace_null_with_other, axis=1) 
       #Replace NaN values in borough with on street name
       df = replace_null_borough_with_on_street_name(df, street_borough_mapping)
-      #Replace Nan values in borough with off street name
       #Drop columns borough is na (no way to find the borough)
       df.dropna(subset=['BOROUGH'], inplace=True)
       #NEW COLUMN: main street ( displayed street )
