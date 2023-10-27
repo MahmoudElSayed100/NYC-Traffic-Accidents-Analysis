@@ -81,7 +81,7 @@ def execute_hook(df, df2):
     table_name2 = "all_injuries"
     sql_folder_path = r"C:\Users\Admin\Desktop\SEF-Final-Project-NYC-Accidents-Analysis\hook_SQL_commands"
     try:
-        start_time = time.time()  # Record the start time
+        start_time = time.time()  
         print("executing hook")
         db_session = create_connection()
         print(f"Time taken for create_connection: {time.time() - start_time} seconds")
