@@ -22,7 +22,7 @@ FROM
     AccidentAggregates AS a;
 
 --AGG YEARLY INJURED - KILLED
-CREATE TABLE traffic_accidents.agg_yearly_killed_injured AS
+CREATE TABLE IF NOT EXISTS traffic_accidents.agg_yearly_killed_injured AS
 SELECT
     EXTRACT(YEAR FROM crash_date) AS year,
     SUM(total_killed) AS total_killed,
@@ -32,5 +32,4 @@ FROM
 GROUP BY
     year
 ORDER BY
-    year
-
+    year;
