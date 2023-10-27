@@ -23,30 +23,6 @@ def trim_spaces_in_df(df):
       suffix = str(e)
       show_error_message(error_prefix, suffix)
 
-def replace_null_with_other(row):
-   try:
-      if pd.isna(row['BOROUGH']) and pd.isna(row['ON_STREET_NAME']) and pd.isna(row['CROSS_STREET_NAME']) and pd.isna(row['OFF_STREET_NAME']):
-         return 'OTHER'
-      else:
-         return row['BOROUGH']
-   except Exception as e:
-      error_prefix = ErrorHandling.CL_HANDLER_REPLACE_NULL_WITH_OTHER.value
-      suffix = str(e)
-      show_error_message(error_prefix, suffix)
-
-def replace_null_borough_with_zipcode(df, zipcode_dic):
-   try:
-      for index, row in df.iterrows():
-         if pd.isna(row['BOROUGH']) and not pd.isna(row['ZIP_CODE']):
-               zipcode = row['ZIP_CODE']
-               if zipcode in zipcode_dic:
-                  df.at[index, 'BOROUGH'] = zipcode_dic[zipcode]
-      return df
-   except Exception as e:
-      error_prefix = ErrorHandling.CL_HANDLER_REPLACE_NULL_WITH_ZIP_CODE.value
-      suffix = str(e)
-      show_error_message(error_prefix, suffix)
-
 def replace_null_borough_with_on_street_name(df, street_name_dict):
    try:
       for index, row in df.iterrows():
@@ -60,18 +36,6 @@ def replace_null_borough_with_on_street_name(df, street_name_dict):
       suffix = str(e)
       show_error_message(error_prefix, suffix)
 
-def replace_null_borough_with_off_street(df, street_name_dict):
-   try:
-      for index, row in df.iterrows():
-         if pd.isna(row['BOROUGH']) and not pd.isna(row['OFF_STREET_NAME']):
-               off_street_name = row['OFF_STREET_NAME']
-               if off_street_name in street_name_dict:
-                  df.at[index, 'BOROUGH'] = street_name_dict[off_street_name]
-      return df
-   except Exception as e:
-      error_prefix = ErrorHandling.CL_HANDLER_REPLACE_NULL_WITH_OFF_STR_NAME.value
-      suffix = str(e)
-      show_error_message(error_prefix, suffix)
 
 def clean_nyc_traffic_data(df):
    try:
