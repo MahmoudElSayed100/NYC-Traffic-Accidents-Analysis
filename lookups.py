@@ -50,3 +50,8 @@ class DESTINATION_SCHEMA(Enum):
 class MAIN_SOURCE_URL(Enum):
    url = "https://data.cityofnewyork.us/api/views/yjf6-ewhz/rows.csv?accessType=DOWNLOAD"
    url2 = "https://data.cityofnewyork.us/api/views/h9gi-nx95/rows.csv?accessType=DOWNLOAD"
+
+class ETLStep(Enum):
+    PREHOOK = 'prehook'
+    HOOK = 'hook'
+    POSTHOOK = 'posthook'
