@@ -1,5 +1,5 @@
 from database_handler import create_connection, execute_query, close_connection,return_data_as_df, return_insert_into_sql_statement_from_df_stg
-from lookups import DESTINATION_SCHEMA, InputTypes, ErrorHandling
+from lookups import DESTINATION_SCHEMA, InputTypes, ErrorHandling, ETLStep
 from logging_handler import show_error_message
 from misc_handler import execute_sql_folder
 from datetime import datetime
@@ -79,7 +79,8 @@ import time
 def execute_hook(df, df2):
     table_name = "All_Accidents"
     table_name2 = "all_injuries"
-    sql_folder_path = r"C:\Users\Admin\Desktop\SEF-Final-Project-NYC-Accidents-Analysis\hook_SQL_commands"
+    sql_folder_path = './SQL_commands'
+    etl_step = ETLStep.HOOK
     try:
         start_time = time.time()  
         print("executing hook")
@@ -127,7 +128,7 @@ def execute_hook(df, df2):
 
         start_time = time.time()
         print("executing sql folder")
-        execute_sql_folder(db_session, sql_folder_path)
+        execute_sql_folder(db_session, sql_folder_path, etl_step)
         print(f"Time taken for execute_sql_folder: {time.time() - start_time} seconds")
 
         print("inserting etl checkpoint")
