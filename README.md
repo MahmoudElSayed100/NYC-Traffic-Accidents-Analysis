@@ -94,21 +94,16 @@
 ### Logger File
 
   
-| ![Landing](./readme/logger.png) |
+ ![Landing](./readme/logger.png) 
 
-  
-  
+> First ETL run takes ~25 mins and then each run takes ~10 mins
+
 
 ### Data Flow Diagrams
 
   
 
-| Map screen | Dashboard screen | Bin Management screen |
-
-| ---| ---| ---|
-
-| ![Map](readme/mockups/web/map.png)| ![Map](./readme/mockups/web/dashboard.png)| ![Map](./readme/mockups/web/bin_crud.png)|
-
+ ![Map](./readme/database%20schema.png)
   
   
 
