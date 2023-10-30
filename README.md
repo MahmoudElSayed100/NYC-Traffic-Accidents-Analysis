@@ -168,6 +168,14 @@ A main interface for viewers to explore:
   
 <br><br>
 
+## Report Demo
+
+<video width="640" height="360" controls>
+	<source src="./readme/full demo.gif" type="gif">
+</video>
+
+<br><br>
+
 <!-- Implementation -->
 
 <a  name="Demo"  ></a>
@@ -178,16 +186,24 @@ A main interface for viewers to explore:
   
 ### App
 
+## Tech Stacks
+
+### Frontend
+
+- **Business Intelligence Tool:** Power BI
+
+### Backend
+
 - **Programming Language:** Python
   - **Libraries:** PyScobg2, Requests, DateTime, Pandas, NumPy, OS
-
 - **Database:** PostgreSQL
+- **Deployment and Hosting:** AWS
+- **Version Control:** GitHub (SourceTree for Git client)
+
+### Data Integration
 
 - **API Integration:** SOCRATA API
 
-- **Deployment and Hosting:** AWS
-
-- **Version Control:** GitHub (SourceTree for Git client)
 
 
 
