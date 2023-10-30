@@ -149,7 +149,7 @@ A main interface for viewers to explore:
 <h3> Location Page </h3>
 <br>
 
- ![Landing](./readme/locationdemo.gif)  ![fsdaf](./readme/implementation/update_pickup.gif) 
+ ![Landing](./readme/locationdemo.gif)
 <br>
 <h3> Victims Page </h3>
 <br>
@@ -159,7 +159,7 @@ A main interface for viewers to explore:
 <h3> Victim Types Page </h3>
 <br>
 
- ![Landing](./readme/victimstypesdemo.gif)  ![fsdaf](./readme/implementation/edit_profile.gif) 
+ ![Landing](./readme/victimstypesdemo.gif)
 <br>
 <h3> Demographics Page </h3>
 <br>
