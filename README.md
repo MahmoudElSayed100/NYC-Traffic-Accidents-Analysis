@@ -144,7 +144,6 @@ A main interface for viewers to explore:
 <h3> Causes Page </h3>
 <br>
 
-
  ![fsdaf](./readme/report2.2.png) 
 <br>
 <h3> Location Page </h3>
@@ -154,18 +153,17 @@ A main interface for viewers to explore:
 <br>
 <h3> Victims Page </h3>
 <br>
-  
 
  ![fsdaf](./readme/report4.4.png)
 <br>
 <h3> Victim Types Page </h3>
 <br>
-  
+
  ![Landing](./readme/report5.5.png)  ![fsdaf](./readme/implementation/edit_profile.gif) 
 <br>
 <h3> Demographics Page </h3>
 <br>
-  
+
  ![fsdaf](./readme/report6.6.png)
   
 
@@ -179,10 +177,18 @@ A main interface for viewers to explore:
   
 ### App
 
+- **Programming Language:** Python
+  - **Libraries:** PyScobg2, Requests, DateTime, Pandas, NumPy, OS
+
+- **Database:** PostgreSQL
+
+- **API Integration:** SOCRATA API
+
+- **Deployment and Hosting:** AWS
+
+- **Version Control:** GitHub (SourceTree for Git client)
 
 
-
-  
 
 <br><br>
 
