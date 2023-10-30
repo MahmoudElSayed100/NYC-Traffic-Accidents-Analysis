@@ -166,43 +166,36 @@ A main interface for viewers to explore:
 ### App
 
 
- ![Landing](./readme/report1.png) | ![fsdaf](./readme/implementation/create_bin.gif) |
+ ![Landing](./readme/report1.png)  ![fsdaf](./readme/implementation/create_bin.gif) |
 
   
 
 
 
- ![fsdaf](./readme/report2.png) |
+ ![fsdaf](./readme/report2.png) 
 
   
   
 
- ![Landing](./readme/report3.png) | ![fsdaf](./readme/implementation/update_pickup.gif) |
+ ![Landing](./readme/report3.png)  ![fsdaf](./readme/implementation/update_pickup.gif) |
 
   
   
 
- ![fsdaf](./readme/report4.png)|
+ ![fsdaf](./readme/report4.png)
 
   
   
- ![Landing](./readme/report5.png) | ![fsdaf](./readme/implementation/edit_profile.gif) |
+ ![Landing](./readme/report5.png)  ![fsdaf](./readme/implementation/edit_profile.gif) |
 
   
   
- ![fsdaf](./readme/report6.png)|
+ ![fsdaf](./readme/report6.png)
 
   
 
 <br><br>
 
-
-
-| Data Transfer Demo |
-
-| ---|
-
-| ![fsdaf](./readme/implementation/arduino_data.png) |
 
 <br><br>
 
