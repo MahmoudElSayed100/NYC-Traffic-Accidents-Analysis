@@ -203,8 +203,6 @@ A main interface for viewers to explore:
 - **API Integration:** SOCRATA API
 
 
-
-
 <br><br>
 
 
