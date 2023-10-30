@@ -94,12 +94,7 @@
 ### Logger File
 
   
-
-| Bins Map screen | Dashboard screen | Bin Management screen |
-
-| ---| ---| ---|
-
-| ![Landing](./readme/wireframes/web/map.png) | ![Admin Dashboard](./readme/wireframes/web/dashboard.png) | ![User Management](./readme/wireframes/web/bin_crud.png) |
+| ![Landing](./readme/logger.png) |
 
   
   
