@@ -41,44 +41,28 @@
 ### User Stories
 
   
-1. As a Data Engineer:
-
-	I want to ensure that NYC traffic accidents data is collected, stored, and processed efficiently.
-
-	I want to automate data retrieval from various sources for real-time analysis.
-
+1. As a Data Engineer:<br>
+	I want to ensure that NYC traffic accidents data is collected, stored, and processed efficiently.<br>
+	I want to automate data retrieval from various sources for real-time analysis<br>
 	I want to build and maintain robust data pipelines to ensure data accuracy.
 
-2. As an Analyst:
-
-	I want to explore and analyze NYC traffic accidents data to identity patterns and trends.
-
-	I want to query the database.
-
+2. As an Analyst:<br>
+	I want to explore and analyze NYC traffic accidents data to identity patterns and trends.<br>
+	I want to query the database.<br>
 	I want to access interactive dashboards for data visualization.
 
-3. As a Traffic Engineer:
-
-	I want to have access to detailed traffic accident data for traffic management and safety improvements.
-
-	I want to analyze traffic accident hotspots and identify areas that require infrastructure changes.
-
+3. As a Traffic Engineer:<br>
+	I want to have access to detailed traffic accident data for traffic management and safety improvements.<br>
+	I want to analyze traffic accident hotspots and identify areas that require infrastructure changes.<br>
 	I want to monitor the impact of traffic interventions through historical data.
 
-4. As a Public Safety Advocate:
+4. As a Public Safety Advocate:<br>
+	I want to use traffic accident data to raise public awareness about safety issues.<br>
+	I want to identify areas with high accident rates and advocate for safety improvements.<br>I want to collaborate with local authorities to address safety concerns.
 
-	I want to use traffic accident data to raise public awareness about safety issues.
-
-	I want to identify areas with high accident rates and advocate for safety improvements.
-
-	I want to collaborate with local authorities to address safety concerns.
-
-5. As a Governmental Organization:
-
-	I want to have access to comprehensive traffic accident data to inform policy decision makers and resource allocation.
-
-	I want to assess the effectiveness of traffic safety measures over time.
-
+5. As a Governmental Organization:<br>
+   I want to have access to comprehensive traffic accident data to inform policy decision makers and resource allocation.<br>
+	I want to assess the effectiveness of traffic safety measures over time.<br>
 	I want to have access to real-time data for emergency response coordination and traffic management.
 
 
@@ -152,7 +136,44 @@ A main interface for viewers to explore:
 <br>
 
 <br>
+<h3> Overview Page </h3>
+<br>
 
+ ![Landing](./readme/report1.1.png)  ![fsdaf](./readme/implementation/create_bin.gif) 
+
+  
+<br>
+<h3> Causes Page </h3>
+<br>
+
+
+ ![fsdaf](./readme/report2.2.png) 
+
+<br>
+<h3> Location Page </h3>
+<br>
+  
+
+ ![Landing](./readme/report3.3.png)  ![fsdaf](./readme/implementation/update_pickup.gif) 
+
+<br>
+<h3> Victims Page </h3>
+<br>
+  
+
+ ![fsdaf](./readme/report4.4.png)
+
+<br>
+<h3> Victim Types Page </h3>
+<br>
+  
+ ![Landing](./readme/report5.5.png)  ![fsdaf](./readme/implementation/edit_profile.gif) 
+
+<br>
+<h3> Demographics Page </h3>
+<br>
+  
+ ![fsdaf](./readme/report6.6.png)
   
 
 <!-- Implementation -->
@@ -166,31 +187,7 @@ A main interface for viewers to explore:
 ### App
 
 
- ![Landing](./readme/report1.png)  ![fsdaf](./readme/implementation/create_bin.gif) 
 
-  
-
-
-
- ![fsdaf](./readme/report2.png) 
-
-  
-  
-
- ![Landing](./readme/report3.png)  ![fsdaf](./readme/implementation/update_pickup.gif) 
-
-  
-  
-
- ![fsdaf](./readme/report4.png)
-
-  
-  
- ![Landing](./readme/report5.png)  ![fsdaf](./readme/implementation/edit_profile.gif) 
-
-  
-  
- ![fsdaf](./readme/report6.png)
 
   
 
