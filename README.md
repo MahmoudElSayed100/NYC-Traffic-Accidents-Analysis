@@ -144,7 +144,7 @@ A main interface for viewers to explore:
 <h3> Causes Page </h3>
 <br>
 
- ![fsdaf](./readme/report2.2.png) 
+ ![fsdaf](./readme/causes%20updated.png) 
 <br>
 <h3> Location Page </h3>
 <br>
@@ -159,13 +159,14 @@ A main interface for viewers to explore:
 <h3> Victim Types Page </h3>
 <br>
 
- ![Landing](./readme/report5.5.png)  ![fsdaf](./readme/implementation/edit_profile.gif) 
+ ![Landing](./readme/victim%20types%20updated%202.png)  ![fsdaf](./readme/implementation/edit_profile.gif) 
 <br>
 <h3> Demographics Page </h3>
 <br>
 
  ![fsdaf](./readme/report6.6.png)
   
+<br><br>
 
 <!-- Implementation -->
 
