@@ -107,12 +107,6 @@
   
   
 
-| Announcements screen | Login screen | Landing screen |
-
-| ---| ---| ---|
-
-| ![Map](readme/mockups/web/announcements.png)| ![Map](./readme/mockups/web/login.png)| ![Map](./readme/mockups/web/landing.png)|
-
 <br><br>
 
   
@@ -176,7 +170,7 @@ A main interface for viewers to explore:
 
 | ---| ---|
 
-| ![Landing](./readme/implementation/dashboard.gif) | ![fsdaf](./readme/implementation/create_bin.gif) |
+| ![Landing](./readme/report1.png) | ![fsdaf](./readme/implementation/create_bin.gif) |
 
   
 
@@ -184,7 +178,7 @@ A main interface for viewers to explore:
 
 | ---|
 
-| ![fsdaf](./readme/implementation/map.gif) |
+| ![fsdaf](./readme/report2.png) |
 
   
   
@@ -193,7 +187,7 @@ A main interface for viewers to explore:
 
 | ---| ---|
 
-| ![Landing](./readme/implementation/filter_bins.gif) | ![fsdaf](./readme/implementation/update_pickup.gif) |
+| ![Landing](./readme/report3.png) | ![fsdaf](./readme/implementation/update_pickup.gif) |
 
   
   
@@ -202,7 +196,7 @@ A main interface for viewers to explore:
 
 | ---|
 
-| ![fsdaf](./readme/implementation/message.gif)|
+| ![fsdaf](./readme/report4.png)|
 
   
   
@@ -211,7 +205,7 @@ A main interface for viewers to explore:
 
 | ---| ---|
 
-| ![Landing](./readme/implementation/change_map.gif) | ![fsdaf](./readme/implementation/edit_profile.gif) |
+| ![Landing](./readme/report5.png) | ![fsdaf](./readme/implementation/edit_profile.gif) |
 
   
   
@@ -220,7 +214,7 @@ A main interface for viewers to explore:
 
 | ---|
 
-| ![fsdaf](./readme/implementation/landing.gif)|
+| ![fsdaf](./readme/report6.png)|
 
   
 
