@@ -170,9 +170,7 @@ A main interface for viewers to explore:
 
 ## Report Demo
 
-<video width="640" height="360" controls>
-	<source src="./readme/full demo.gif" type="gif">
-</video>
+![vid](./readme/fulldemo.gif)
 
 <br><br>
 
