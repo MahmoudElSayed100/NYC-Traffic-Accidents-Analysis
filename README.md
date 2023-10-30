@@ -166,55 +166,31 @@ A main interface for viewers to explore:
 ### App
 
 
-| Dashboard Screen | Create Bin Screen |
-
-| ---| ---|
-
-| ![Landing](./readme/report1.png) | ![fsdaf](./readme/implementation/create_bin.gif) |
+ ![Landing](./readme/report1.png) | ![fsdaf](./readme/implementation/create_bin.gif) |
 
   
 
-| Bins to Map Screen |
 
-| ---|
 
-| ![fsdaf](./readme/report2.png) |
+ ![fsdaf](./readme/report2.png) |
 
   
   
 
-| Filter Bins Screen | Update Pickup Time Screen |
-
-| ---| ---|
-
-| ![Landing](./readme/report3.png) | ![fsdaf](./readme/implementation/update_pickup.gif) |
+ ![Landing](./readme/report3.png) | ![fsdaf](./readme/implementation/update_pickup.gif) |
 
   
   
 
-| Announcements Screen |
-
-| ---|
-
-| ![fsdaf](./readme/report4.png)|
+ ![fsdaf](./readme/report4.png)|
 
   
   
-
-| Change Map Screen | Edit Profile Screen |
-
-| ---| ---|
-
-| ![Landing](./readme/report5.png) | ![fsdaf](./readme/implementation/edit_profile.gif) |
+ ![Landing](./readme/report5.png) | ![fsdaf](./readme/implementation/edit_profile.gif) |
 
   
   
-
-| Landing Screen |
-
-| ---|
-
-| ![fsdaf](./readme/report6.png)|
+ ![fsdaf](./readme/report6.png)|
 
   
 
