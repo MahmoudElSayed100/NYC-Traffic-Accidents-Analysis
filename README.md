@@ -166,7 +166,7 @@ A main interface for viewers to explore:
 ### App
 
 
- ![Landing](./readme/report1.png)  ![fsdaf](./readme/implementation/create_bin.gif) |
+ ![Landing](./readme/report1.png)  ![fsdaf](./readme/implementation/create_bin.gif) 
 
   
 
@@ -177,7 +177,7 @@ A main interface for viewers to explore:
   
   
 
- ![Landing](./readme/report3.png)  ![fsdaf](./readme/implementation/update_pickup.gif) |
+ ![Landing](./readme/report3.png)  ![fsdaf](./readme/implementation/update_pickup.gif) 
 
   
   
@@ -186,7 +186,7 @@ A main interface for viewers to explore:
 
   
   
- ![Landing](./readme/report5.png)  ![fsdaf](./readme/implementation/edit_profile.gif) |
+ ![Landing](./readme/report5.png)  ![fsdaf](./readme/implementation/edit_profile.gif) 
 
   
   
