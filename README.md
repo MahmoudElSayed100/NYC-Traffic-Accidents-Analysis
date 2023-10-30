@@ -87,7 +87,7 @@
 
   
 
- ![Map](./readme/database%20schema.png)
+ ![Map](./readme/database%20schema%20updated.png)
   
   
 
@@ -243,7 +243,7 @@ git clone https://github.com/MahmoudElSayed100/SEF-Final-Project-NYC-Accidents-A
 ### **Running the Backend**:
 
 **Start the Data Ingestion & ETL Process**:
-`python data_ingestion_script.py`
+`main.py`
 
 
 You should be able to check the app.log file to see the ETL work.
