@@ -140,35 +140,28 @@ A main interface for viewers to explore:
 <br>
 
  ![Landing](./readme/report1.1.png)  ![fsdaf](./readme/implementation/create_bin.gif) 
-
-  
 <br>
 <h3> Causes Page </h3>
 <br>
 
 
  ![fsdaf](./readme/report2.2.png) 
-
 <br>
 <h3> Location Page </h3>
 <br>
-  
 
  ![Landing](./readme/report3.3.png)  ![fsdaf](./readme/implementation/update_pickup.gif) 
-
 <br>
 <h3> Victims Page </h3>
 <br>
   
 
  ![fsdaf](./readme/report4.4.png)
-
 <br>
 <h3> Victim Types Page </h3>
 <br>
   
  ![Landing](./readme/report5.5.png)  ![fsdaf](./readme/implementation/edit_profile.gif) 
-
 <br>
 <h3> Demographics Page </h3>
 <br>
