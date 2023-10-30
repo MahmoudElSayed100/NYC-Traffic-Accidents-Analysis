@@ -9,3 +9,5 @@ def etl_run():
    df,df2 = execute_prehook()
    execute_hook(df,df2)
    execute_posthook()
+
+etl_run()
