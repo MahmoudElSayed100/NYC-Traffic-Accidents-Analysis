@@ -105,36 +105,6 @@
 
   
 
-Bin Tracker is built using the following technologies:
-
-  
-
-## Frontend
-
-Interactive PowerBI Dashboard:
-
-A main interface for viewers to explore:
-
-1. Traffic Accident Trends: Graphs, charts, and visualizations showcasing key traffic accident metrics over time.
-2. Location Analysis: Visual representations of NYC Map including accident locations by borough, street, and geographical coordinates, with interactive map.
-3. Demographic Insights: Data visualizations highlighting trends in the age, gender, and role of individuals involved in accidents.
-4. Victim Summary: Summary data on total victims, injuries, and fatalities, providing insights into the impact of accidents.
-5. Custom Filters: Options for customizing views by date, location, or specific accident characteristics.
-
-
-  
-
-<br>
-
-  
-
-## Backend
-
-1. Data Retrieval & API Integration: Utilizing the Socrata API to retrieve traffic accident data from authoritative sources.
-2. ETL Pipeline: using Python and Pandas, raw data is extracted, transformed into a usable format and loaded into PostgreSQL database.
-3. Database: Schema Design - Indexing - Data Integrity - Backup & Recovery. 
-
-<br>
 
 <br>
 <h3> Overview Page </h3>
@@ -186,9 +156,27 @@ A main interface for viewers to explore:
 
 ### Frontend
 
-- **Business Intelligence Tool:** Power BI
+Interactive PowerBI Dashboard:
+
+A main interface for viewers to explore:
+
+1. Traffic Accident Trends: Graphs, charts, and visualizations showcasing key traffic accident metrics over time.
+2. Location Analysis: Visual representations of NYC Map including accident locations by borough, street, and geographical coordinates, with interactive map.
+3. Demographic Insights: Data visualizations highlighting trends in the age, gender, and role of individuals involved in accidents.
+4. Victim Summary: Summary data on total victims, injuries, and fatalities, providing insights into the impact of accidents.
+5. Custom Filters: Options for customizing views by date, location, or specific accident characteristics.
 
 ### Backend
+
+1. Data Retrieval & API Integration: Utilizing the Socrata API to retrieve traffic accident data from authoritative sources.
+2. ETL Pipeline: using Python and Pandas, raw data is extracted, transformed into a usable format and loaded into PostgreSQL database.
+3. Database: Schema Design - Indexing - Data Integrity - Backup & Recovery.
+
+Business Intelligence (BI) Tool:
+
+- **Business Intelligence Tool:** Power BI
+
+Programming Language and Libraries:
 
 - **Programming Language:** Python
   - **Libraries:** PyScobg2, Requests, DateTime, Pandas, NumPy, OS
@@ -196,10 +184,10 @@ A main interface for viewers to explore:
 - **Deployment and Hosting:** AWS
 - **Version Control:** GitHub (SourceTree for Git client)
 
-### Data Integration
+Data Integration:
 
 - **API Integration:** SOCRATA API
-<br><br>
+
 
 <br><br>
 
