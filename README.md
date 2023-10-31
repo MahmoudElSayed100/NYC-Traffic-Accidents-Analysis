@@ -260,4 +260,5 @@ git clone https://github.com/MahmoudElSayed100/SEF-Final-Project-NYC-Accidents-A
 
 You should be able to check the app.log file to see the ETL work.
 
-As for the dashboard access: Please use this link "public powerbi link" to access your data.
+As for the dashboard access: Please use this [public powerbi link](https://app.powerbi.com/view?r=eyJrIjoiZDRkMzc2ZWYtYjM5ZC00ODA5LWEzNzItYTlhZmI3NGQzZTk1IiwidCI6IjJhZDk2OTM0LTQzZTUtNDFjMi05NzYxLWYzMzVmZTIxNGNjMyIsImMiOjl9) to access your data.
+
