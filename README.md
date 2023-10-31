@@ -97,8 +97,8 @@
   
 
 <!-- Tech stacks -->
-<a  name="Demo"  ></a>
-<img  src="./readme/title5.svg" id="#demo"/>
+<a  name="stacks"  ></a>
+<img  src="./readme/title5.svg" id="stacks"/>
 
 
 
@@ -141,8 +141,8 @@ Data Integration:
 
 
 <br><br>
-<a  name="stacks"></a>
-<img  src="./readme/title4.svg" id="stacks" />
+<a  name="Demo"></a>
+<img  src="./readme/title4.svg" id="#demo" />
 
 
 <br>
